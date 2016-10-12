@@ -1,0 +1,21 @@
+<!--
+  Generated template for the GamePage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Play</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <game-options *ngIf="currentState==='OPTIONS'" (onStartGame)="startGame($event)"></game-options>
+  <game-gameplay *ngIf="currentState==='GAMEPLAY'" (onFinishGame)="finishGame($event)"></game-gameplay>
+  <game-results *ngIf="currentState==='RESULTS'" (onEndResults)="endResults($event)"></game-results>
+</ion-content>

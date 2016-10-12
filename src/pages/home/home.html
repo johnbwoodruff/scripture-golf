@@ -1,0 +1,31 @@
+<!--
+  Generated template for the HomePage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="home">
+  <img class="align-center" src="../../assets/images/golfer.svg" width="150px" height="150px"/>
+  <h1 text-center margin-bottom>Scripture Golf</h1>
+  <button ion-button icon-left block large margin-bottom (click)="openPage('game')">
+    <ion-icon name="ios-game-controller-b"></ion-icon>
+    PLAY NOW
+  </button>
+  <button ion-button icon-left block large margin-bottom (click)="openPage('stats')">
+    <ion-icon name="podium"></ion-icon>
+    YOUR STATS
+  </button>
+  <button ion-button icon-left block large margin-bottom (click)="openPage('leaderboard')">
+    <ion-icon name="trophy"></ion-icon>
+    LEADERBOARD
+  </button>
+</ion-content>

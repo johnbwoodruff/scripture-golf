@@ -1,0 +1,52 @@
+<!--
+  Generated template for the SettingsPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Settings</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="settings">
+  <ion-list>
+    <ion-list-header>
+      Books of Scripture
+    </ion-list-header>
+    <ion-item>
+      <ion-label>Book of Mormon</ion-label>
+      <ion-toggle [(ngModel)]="settings.bookOfMormon" item-right (ionChange)="saveSettings()"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Doctrine and Covenants</ion-label>
+      <ion-toggle [(ngModel)]="settings.doctrineAndCovenants" item-right (ionChange)="saveSettings()"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Pearl of Great Price</ion-label>
+      <ion-toggle [(ngModel)]="settings.pearlOfGreatPrice" item-right (ionChange)="saveSettings()"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Old Testament</ion-label>
+      <ion-toggle [(ngModel)]="settings.oldTestament" item-right (ionChange)="saveSettings()"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>New Testament</ion-label>
+      <ion-toggle [(ngModel)]="settings.newTestament" item-right (ionChange)="saveSettings()"></ion-toggle>
+    </ion-item>
+    <ion-list-header>
+      Data Management
+    </ion-list-header>
+    <ion-item>
+      Erase Data
+      <button ion-button icon-left icon-left color="danger" outline item-right (click)="eraseData()">
+        <ion-icon name="trash"></ion-icon>
+        Delete
+      </button>
+    </ion-item>
+  </ion-list>
+</ion-content>
