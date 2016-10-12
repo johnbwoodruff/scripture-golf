@@ -18,6 +18,7 @@ export class SgToast {
     let toastConfig: ToastOptions = {
       message: message,
       showCloseButton: showCloseButton,
+      position: 'top',
       closeButtonText: 'OK'
     };
     if(!showCloseButton) {

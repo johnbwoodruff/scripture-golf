@@ -1,7 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {Http} from '@angular/http';
 import {Platform, Nav, AlertController} from 'ionic-angular';
-import {Storage} from '@ionic/storage';
 import {Auth, User} from '@ionic/cloud-angular';
 import {StatusBar} from 'ionic-native';
 import {HomePage} from '../pages/home/home';
@@ -19,7 +18,7 @@ export class MyApp {
   pages: Array<{title: string, component: any}>;
   currUser: any;
 
-  constructor(public platform: Platform, public auth: Auth, public storage: Storage, public user: User, public toastService: SgToast, public alertCtrl: AlertController, public http: Http, public scriptures: Scriptures) {
+  constructor(public platform: Platform, public auth: Auth, public user: User, public toastService: SgToast, public alertCtrl: AlertController, public http: Http, public scriptures: Scriptures) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation

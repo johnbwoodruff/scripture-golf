@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
-import {Storage} from '@ionic/storage';
+import {Sql} from '../../providers';
 import {Settings} from '../../models';
 import {SgToast} from '../../providers/sg-toast/sg-toast';
 
@@ -17,7 +17,7 @@ import {SgToast} from '../../providers/sg-toast/sg-toast';
 export class SettingsPage {
   settings: Settings;
 
-  constructor(public nav: NavController, public storage: Storage, public toastService: SgToast) {
+  constructor(public nav: NavController, public storage: Sql, public toastService: SgToast) {
     this.settings = {
       bookOfMormon: true,
       doctrineAndCovenants: true,

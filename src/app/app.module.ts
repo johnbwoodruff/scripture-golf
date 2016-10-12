@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import { MyApp } from './app.component';
 import { AboutPage } from '../pages/about/about';
@@ -54,7 +53,6 @@ const cloudSettings: CloudSettings = {
     Game,
     Scriptures,
     SgToast,
-    Storage,
     Sql
   ]
 })

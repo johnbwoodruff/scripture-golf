@@ -1,7 +1,9 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { Game, Scriptures } from '../../../providers';
+import { AlertOptions } from 'ionic-angular';
+import { Game, Scriptures, SgToast } from '../../../providers';
 import { Scripture, Player, Book } from '../../../models';
 
+const GUESSING_STATE_BOOK = 'BOOK';
 const GUESSING_STATE_CHAPTER = 'CHAPTER';
 
 @Component({
@@ -27,8 +29,12 @@ export class GameGameplay {
   pearlOfGreatPrice: string;
   oldTestament: string;
   newTestament: string;
+  selectOptions: AlertOptions;
 
-  constructor(public scriptureService: Scriptures, public gameCtrl: Game) {
+  constructor(public scriptureService: Scriptures, public gameCtrl: Game, public toastService: SgToast) {
+    this.selectOptions = {
+      enableBackdropDismiss: false
+    };
     this.currPlayer = new Player('Player 1', 1);
     this.currScripture = {
       book: '',
@@ -36,8 +42,8 @@ export class GameGameplay {
       verse: ''
     };
     this.guessedChapters = [];
-    this.showVerse = false;
-    this.guessingState = GUESSING_STATE_CHAPTER;
+    this.showVerse = true;
+    this.guessingState = GUESSING_STATE_BOOK;
     this.numPlayers = this.gameCtrl.getOptions().numPlayers;
     this.numRounds = this.gameCtrl.getOptions().numRounds;
     this.sameScriptures = this.gameCtrl.getOptions().sameScriptures;
@@ -96,7 +102,7 @@ export class GameGameplay {
     this.currPlayer = this.gameCtrl.getCurrentPlayer();
     this.currScripture = this.scriptures[0];
     this.currRound = this.gameCtrl.getCurrentRound();
-    // TODO: TAKE THIS OUT
+    // TODO: Remove this
     console.log(this.currScripture);
   }
 
@@ -119,33 +125,66 @@ export class GameGameplay {
   }
 
   checkBook() {
-    let book = this.currScripture.book;
-    if(this.bookOfMormon === book || this.doctrineAndCovenants === book || this.pearlOfGreatPrice === book || this.oldTestament === book || this.newTestament === book) {
-      // Answer is correct
-      this.guessingState = GUESSING_STATE_CHAPTER;
+    if(this.bookOfMormon || this.doctrineAndCovenants || this.pearlOfGreatPrice || this.oldTestament || this.newTestament) {
+      let book = this.currScripture.book;
+      if(this.bookOfMormon === book || this.doctrineAndCovenants === book || this.pearlOfGreatPrice === book || this.oldTestament === book || this.newTestament === book) {
+        // Answer is correct
+        this.toastService.showToast('Great job!');
+        this.guessingState = GUESSING_STATE_CHAPTER;
+      }
+      else {
+        // Answer is incorrect, add point
+        this.toastService.showToast('Sorry. Guess again.');
+        this.currPlayer.addPoint(this.currRound);
+        this.bookOfMormon = null;
+        this.doctrineAndCovenants = null;
+        this.pearlOfGreatPrice = null;
+        this.oldTestament = null;
+        this.newTestament = null;
+      }
     }
     else {
-      // Answer is incorrect, add point
-      this.currPlayer.addPoint(this.currRound);
+      // SHOW TOAST ABOUT PICKING ANSWER
+      this.toastService.showToast('Please choose a book to guess');
     }
   }
 
   checkChapter() {
-    if(this.chapterGuess === this.currScripture.chapter) {
-      // Answer is correct, end current player's turn
-      this.endRound();
+    if(this.chapterGuess) {
+      if(this.chapterGuess === this.currScripture.chapter) {
+        // Answer is correct, end current player's turn
+        this.toastService.showToast('Correct! Well done!');
+        this.endRound();
+      }
+      else {
+        // Answer is incorrect, record guess and add point
+        if(~this.guessedChapters.indexOf(this.chapterGuess)) {
+          // User already guessed this
+          this.toastService.showToast('You already guessed that.');
+        }
+        else {
+          if(this.chapterGuess - this.currScripture.chapter > 0) {
+            this.toastService.showToast('Incorrect. Guess lower!');
+          }
+          else {
+            this.toastService.showToast('Incorrect. Guess higher!');
+          }
+          this.guessedChapters.push(this.chapterGuess);
+          this.currPlayer.addPoint(this.currRound);
+        }
+        this.chapterGuess = null;
+      }
     }
     else {
-      // Answer is incorrect, record guess and add point
-      this.guessedChapters.push(this.chapterGuess);
-      this.currPlayer.addPoint(this.currRound);
-      this.chapterGuess = null;
+      // SHOW TOAST ABOUT PICKING ANSWER
+      this.toastService.showToast('Please guess a number');
     }
   }
 
   endRound() {
     // Persist player to the game controller
     this.gameCtrl.savePlayer(this.currPlayer);
+    // TODO: If game ends, rather than move to next player, should end game
     this.gameCtrl.nextPlayer();
   }
 
