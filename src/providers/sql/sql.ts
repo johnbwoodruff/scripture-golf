@@ -3,7 +3,7 @@ import { Platform } from 'ionic-angular';
 import { SQLite } from 'ionic-native';
 
 const DB_NAME: string = '__ionicstorage';
-const win: Window = window;
+const win: any = window;
 
 @Injectable()
 export class Sql {

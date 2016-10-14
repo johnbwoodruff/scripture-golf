@@ -210,7 +210,12 @@ export class GameGameplay {
     // Reset round
     this.resetRound();
     // Get next scripture
-    if(this.sameScriptures === 'true' && this.currPlayer.playerNumber === 1) {
+    if(this.sameScriptures === 'true') {
+      if(this.currPlayer.playerNumber === 1) {
+        this.currScriptureIndex++;
+      }
+    }
+    else {
       // If players use same scriptures, only move on to next scripture when starting new round
       this.currScriptureIndex++;
     }
