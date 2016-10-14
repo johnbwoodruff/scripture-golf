@@ -16,7 +16,8 @@ export class GameGameplay {
   books: Book[];
   numPlayers: number;
   numRounds: number;
-  sameScriptures: boolean;
+  sameScriptures: string;
+  currScriptureIndex: number;
   currScripture: Scripture;
   currPlayer: Player;
   currRound: number;
@@ -41,33 +42,45 @@ export class GameGameplay {
       chapter: 0,
       verse: ''
     };
-    this.guessedChapters = [];
-    this.showVerse = true;
-    this.guessingState = GUESSING_STATE_BOOK;
+    this.resetRound();
     this.numPlayers = this.gameCtrl.getOptions().numPlayers;
     this.numRounds = this.gameCtrl.getOptions().numRounds;
     this.sameScriptures = this.gameCtrl.getOptions().sameScriptures;
+    console.log(this.sameScriptures);
     this.getBooks();
-    this.selectScriptures(this.numPlayers, this.numRounds, this.sameScriptures).then((successful) => {
+    this.selectScriptures().then((successful) => {
       if(successful) {
         this.startGame();
       }
     });
   }
 
+  resetRound() {
+    this.guessedChapters = [];
+    this.showVerse = true;
+    this.guessingState = GUESSING_STATE_BOOK;
+    this.bookOfMormon = null;
+    this.doctrineAndCovenants = null;
+    this.pearlOfGreatPrice = null;
+    this.oldTestament = null;
+    this.newTestament = null;
+    this.chapterGuess = null;
+  }
+
   /* GAME SETUP */
 
-  selectScriptures(numPlayers: number, numRounds: number, sameScriptures: boolean): Promise<boolean> {
+  selectScriptures(): Promise<boolean> {
     let p = new Promise((resolve, reject) => {
       let allScriptures: Scripture[], numScriptures: number;
       this.scriptureService.getScriptures().then((data) => {
         // Ensure scriptures are sufficiently randomized.
         allScriptures = this.shuffle(data);
-        if(sameScriptures) {
-          numScriptures = numRounds;
+        console.log(this.sameScriptures);
+        if(this.sameScriptures === 'true') {
+          numScriptures = this.numRounds;
         }
         else {
-          numScriptures = numRounds * numPlayers;
+          numScriptures = this.numRounds * this.numPlayers;
         }
         this.scriptures = allScriptures.slice(0, numScriptures);
         resolve(true);
@@ -100,8 +113,13 @@ export class GameGameplay {
   startGame() {
     this.gameCtrl.startGame();
     this.currPlayer = this.gameCtrl.getCurrentPlayer();
-    this.currScripture = this.scriptures[0];
+    this.currScriptureIndex = 0;
     this.currRound = this.gameCtrl.getCurrentRound();
+    this.changeScripture();
+  }
+
+  changeScripture() {
+    this.currScripture = this.scriptures[this.currScriptureIndex];
     // TODO: Remove this
     console.log(this.currScripture);
   }
@@ -181,11 +199,35 @@ export class GameGameplay {
     }
   }
 
+  nextPlayer() {
+    // TODO: MAKE IT A DIALOG BOX THAT DOESN'T MOVE ON TO THE NEXT ROUND, PASS TO THE NEXT PLAYER
+    // Set state to next player (and round if applicable)
+    this.gameCtrl.nextPlayer();
+    // Get the new current player
+    this.currPlayer = this.gameCtrl.getCurrentPlayer();
+    // Get the new round number if changed
+    this.currRound = this.gameCtrl.getCurrentRound();
+    // Reset round
+    this.resetRound();
+    // Get next scripture
+    if(this.sameScriptures === 'true' && this.currPlayer.playerNumber === 1) {
+      // If players use same scriptures, only move on to next scripture when starting new round
+      this.currScriptureIndex++;
+    }
+    this.changeScripture();
+  }
+
   endRound() {
     // Persist player to the game controller
     this.gameCtrl.savePlayer(this.currPlayer);
     // TODO: If game ends, rather than move to next player, should end game
-    this.gameCtrl.nextPlayer();
+    if(this.currRound === this.numRounds && this.currPlayer === this.gameCtrl.getPlayer(this.numPlayers)) {
+      // GAME IS OVER
+      this.finishGame();
+    }
+    else {
+      this.nextPlayer();
+    }
   }
 
   toggleVerse() {

@@ -15,14 +15,15 @@ export class Sql {
       this._db.openDatabase({
         name: DB_NAME,
         location: 2
+      }).then(() => {
+        this._tryInit();
       });
     }
     else {
       console.warn('Storage: SQLite plugin not installed, falling back to WebSQL. Make sure to install cordova-sqlite-storage in production!');
-
       this._db = win.openDatabase(DB_NAME, '1.0', 'database', 5 * 1024 * 1024);
+      this._tryInit();
     }
-    this._tryInit();
   }
 
   // Initialize the DB with our required tables

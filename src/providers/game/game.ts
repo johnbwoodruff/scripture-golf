@@ -51,7 +51,7 @@ export class Game {
   }
 
   public nextPlayer() {
-    if(this.currentPlayer === this.players.length + 1) {
+    if(this.currentPlayer === this.players.length) {
       // Start New Round
       this.currentPlayer = 1;
       this.currentRound++;

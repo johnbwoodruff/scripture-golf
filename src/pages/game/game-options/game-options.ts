@@ -11,19 +11,19 @@ export class GameOptions {
   @Output() onStartGame = new EventEmitter<boolean>();
   numPlayers: number;
   numRounds: number;
-  sameScriptures: boolean;
+  sameScriptures: string;
 
   constructor(public auth: Auth, public user: User, public gameCtrl: Game) {
     this.numPlayers = 1;
     this.numRounds = 1;
-    this.sameScriptures = true;
+    this.sameScriptures = 'true';
   }
 
   startGame() {
     this.gameCtrl.configure({
       numPlayers: this.numPlayers,
       numRounds: this.numRounds,
-      sameScriptures: this.sameScriptures
+      sameScriptures: (this.sameScriptures === 'true') ? 'true' : 'false'
     });
     let players = [];
     for(let i = 1; i <= this.numPlayers; i++) {
