@@ -75,14 +75,14 @@
             </ion-col>
           </ion-row>
         </ion-grid>
-        <p>Chapters Guessed:</p>
+        <div>
+          <p class="float-left chapters-guessed">Chapters Guessed:</p>
+          <button ion-button color="primary" (click)="checkChapter()" class="float-right margin-bottom" small>Check Answer</button>
+          <div class="clear"></div>
+        </div>
         <div class="guessed-section">
           <span *ngIf="guessedChapters.length===0" class="small-hint">None Yet</span>
           <span *ngFor="let num of guessedChapters; let i = index">{{num}}<span *ngIf="i+1<guessedChapters.length">,</span>&nbsp;</span>
-        </div>
-        <div>
-          <button ion-button color="primary" (click)="checkChapter()" class="float-right margin-bottom">Check Answer</button>
-          <div class="clear"></div>
         </div>
       </div>
     </div>

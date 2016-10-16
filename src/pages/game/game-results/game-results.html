@@ -1,1 +1,15 @@
-<h1>RESULTS</h1>
+<ion-content>
+  <h2>{{winningPlayer}} Wins!</h2>
+  <ion-card>
+    <ion-card-header>
+      Score Card
+    </ion-card-header>
+    <ion-list>
+      <ion-item *ngFor="let player of players">
+        <div class="float-left card-player-info">{{player.name}}</div>
+        <div class="float-right card-player-info">{{player.getScore()}}</div>
+        <div class="clear"></div>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+</ion-content>

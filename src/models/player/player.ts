@@ -22,15 +22,6 @@ export class Player implements Person {
     this.stats = [];
   }
 
-  // TODO: Probably remove this method.
-  // public saveRoundScore(round: number, points: number) {
-  //   this.score += points;
-  //   this.stats.push({
-  //     round: round,
-  //     score: points
-  //   });
-  // }
-
   public addPoint(round: number) {
     this.score += 1;
     // Check if round already has points in stats array. If so, add to it. If not, create round of stats.

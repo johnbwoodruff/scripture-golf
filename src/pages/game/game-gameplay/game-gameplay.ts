@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { AlertOptions } from 'ionic-angular';
+import { AlertOptions, AlertController } from 'ionic-angular';
 import { Game, Scriptures, SgToast } from '../../../providers';
 import { Scripture, Player, Book } from '../../../models';
 
@@ -32,7 +32,7 @@ export class GameGameplay {
   newTestament: string;
   selectOptions: AlertOptions;
 
-  constructor(public scriptureService: Scriptures, public gameCtrl: Game, public toastService: SgToast) {
+  constructor(public scriptureService: Scriptures, public gameCtrl: Game, public toastService: SgToast, public alertCtrl: AlertController) {
     this.selectOptions = {
       enableBackdropDismiss: false
     };
@@ -49,7 +49,7 @@ export class GameGameplay {
     console.log(this.sameScriptures);
     this.getBooks();
     this.selectScriptures().then((successful) => {
-      if(successful) {
+      if (successful) {
         this.startGame();
       }
     });
@@ -76,7 +76,7 @@ export class GameGameplay {
         // Ensure scriptures are sufficiently randomized.
         allScriptures = this.shuffle(data);
         console.log(this.sameScriptures);
-        if(this.sameScriptures === 'true') {
+        if (this.sameScriptures === 'true') {
           numScriptures = this.numRounds;
         }
         else {
@@ -125,27 +125,27 @@ export class GameGameplay {
   }
 
   selectionChanged(select: string) {
-    if(select !== 'BOM') {
+    if (select !== 'BOM') {
       this.bookOfMormon = null;
     }
-    if(select !== 'DC') {
+    if (select !== 'DC') {
       this.doctrineAndCovenants = null;
     }
-    if(select !== 'PGP') {
+    if (select !== 'PGP') {
       this.pearlOfGreatPrice = null;
     }
-    if(select !== 'OT') {
+    if (select !== 'OT') {
       this.oldTestament = null;
     }
-    if(select !== 'NT') {
+    if (select !== 'NT') {
       this.newTestament = null;
     }
   }
 
   checkBook() {
-    if(this.bookOfMormon || this.doctrineAndCovenants || this.pearlOfGreatPrice || this.oldTestament || this.newTestament) {
+    if (this.bookOfMormon || this.doctrineAndCovenants || this.pearlOfGreatPrice || this.oldTestament || this.newTestament) {
       let book = this.currScripture.book;
-      if(this.bookOfMormon === book || this.doctrineAndCovenants === book || this.pearlOfGreatPrice === book || this.oldTestament === book || this.newTestament === book) {
+      if (this.bookOfMormon === book || this.doctrineAndCovenants === book || this.pearlOfGreatPrice === book || this.oldTestament === book || this.newTestament === book) {
         // Answer is correct
         this.toastService.showToast('Great job!');
         this.guessingState = GUESSING_STATE_CHAPTER;
@@ -168,20 +168,20 @@ export class GameGameplay {
   }
 
   checkChapter() {
-    if(this.chapterGuess) {
-      if(this.chapterGuess === this.currScripture.chapter) {
+    if (this.chapterGuess) {
+      if (this.chapterGuess === this.currScripture.chapter) {
         // Answer is correct, end current player's turn
         this.toastService.showToast('Correct! Well done!');
         this.endRound();
       }
       else {
         // Answer is incorrect, record guess and add point
-        if(~this.guessedChapters.indexOf(this.chapterGuess)) {
+        if (~this.guessedChapters.indexOf(this.chapterGuess)) {
           // User already guessed this
           this.toastService.showToast('You already guessed that.');
         }
         else {
-          if(this.chapterGuess - this.currScripture.chapter > 0) {
+          if (this.chapterGuess - this.currScripture.chapter > 0) {
             this.toastService.showToast('Incorrect. Guess lower!');
           }
           else {
@@ -199,6 +199,16 @@ export class GameGameplay {
     }
   }
 
+  endTurnAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Good Job!',
+      subTitle: 'Please pass the phone to the next player.',
+      buttons: ['OK'],
+      enableBackdropDismiss: false
+    });
+    alert.present();
+  }
+
   nextPlayer() {
     // TODO: MAKE IT A DIALOG BOX THAT DOESN'T MOVE ON TO THE NEXT ROUND, PASS TO THE NEXT PLAYER
     // Set state to next player (and round if applicable)
@@ -210,8 +220,8 @@ export class GameGameplay {
     // Reset round
     this.resetRound();
     // Get next scripture
-    if(this.sameScriptures === 'true') {
-      if(this.currPlayer.playerNumber === 1) {
+    if (this.sameScriptures === 'true') {
+      if (this.currPlayer.playerNumber === 1) {
         this.currScriptureIndex++;
       }
     }
@@ -219,6 +229,7 @@ export class GameGameplay {
       // If players use same scriptures, only move on to next scripture when starting new round
       this.currScriptureIndex++;
     }
+    this.endTurnAlert();
     this.changeScripture();
   }
 
@@ -226,7 +237,7 @@ export class GameGameplay {
     // Persist player to the game controller
     this.gameCtrl.savePlayer(this.currPlayer);
     // TODO: If game ends, rather than move to next player, should end game
-    if(this.currRound === this.numRounds && this.currPlayer === this.gameCtrl.getPlayer(this.numPlayers)) {
+    if (this.currRound === this.numRounds && this.currPlayer === this.gameCtrl.getPlayer(this.numPlayers)) {
       // GAME IS OVER
       this.finishGame();
     }
