@@ -1,15 +1,31 @@
 <ion-content>
-  <h2>{{winningPlayer}} Wins!</h2>
-  <ion-card>
+  <h2 padding *ngIf="numPlayers>1">{{winningPlayer.name}} Wins!</h2>
+  <h2 padding *ngIf="numPlayers===1">Good Game!</h2>
+  <ion-card no-padding>
     <ion-card-header>
-      Score Card
+      <div class="float-left">Score Card</div>
+      <div class="float-right hint-text">{{numRounds}} Round<span *ngIf="numRounds>1">s</span></div>
     </ion-card-header>
-    <ion-list>
-      <ion-item *ngFor="let player of players">
-        <div class="float-left card-player-info">{{player.name}}</div>
-        <div class="float-right card-player-info">{{player.getScore()}}</div>
-        <div class="clear"></div>
-      </ion-item>
-    </ion-list>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let player of players; let i = index">
+          <ion-icon name="trophy" item-left *ngIf="i===0"></ion-icon>
+          <ion-icon name="person" item-left *ngIf="i>0"></ion-icon>
+          {{player.name}}
+          <ion-note item-right>
+            {{player.getScore()}} point<span *ngIf="player.getScore()!==1">s</span>
+          </ion-note>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+    <ion-row no-padding>
+      <ion-col text-right>
+        <button ion-button color="primary" clear small (click)="share()">
+          <ion-icon name="share" icon-left></ion-icon>
+          &nbsp;&nbsp;Share
+        </button>
+      </ion-col>
+    </ion-row>
   </ion-card>
+  <button ion-button color="primary" class="float-right" (click)="playAgain()">Play Again</button>
 </ion-content>
