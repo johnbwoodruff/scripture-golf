@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { HomePage } from '../home/home';
-import { Game } from '../../providers';
+import { Game } from '../../providers/index';
 
 const GAME_STATE_OPTIONS = 'OPTIONS';
 const GAME_STATE_GAMEPLAY = 'GAMEPLAY';
@@ -32,8 +32,8 @@ export class GamePage {
 
   endResults(response: string) {
     if(response === 'AGAIN') {
+      this.gameCtrl.restartGame();
       this.currentState = GAME_STATE_OPTIONS;
-      // Start over all game options?
     }
     else {
       // Go Home

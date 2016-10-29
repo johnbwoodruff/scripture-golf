@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
+import {NavController, Platform} from 'ionic-angular';
+import {GoogleAnalytics} from 'ionic-native';
+import {Auth} from '@ionic/cloud-angular';
 import {StatsPage} from '../stats/stats';
 import {GamePage} from '../game/game';
-import {LeaderboardPage} from '../leaderboard/leaderboard';
 
 /*
   Generated class for the HomePage page.
@@ -15,7 +16,19 @@ import {LeaderboardPage} from '../leaderboard/leaderboard';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  constructor(public nav: NavController) {}
+  isAuthenticated: boolean;
+
+  constructor(public nav: NavController, public platform: Platform, public auth: Auth) {
+    if(this.platform.is('cordova')) {
+      this.platform.ready().then(() => {
+        this.isAuthenticated = this.auth.isAuthenticated();
+        GoogleAnalytics.trackView('Home Page');
+      });
+    }
+    else {
+      this.isAuthenticated = false;
+    }
+  }
 
   openPage(page: string) {
     switch(page) {
@@ -24,9 +37,6 @@ export class HomePage {
         break;
       case 'game':
         this.nav.setRoot(GamePage);
-        break;
-      case 'leaderboard':
-        this.nav.push(LeaderboardPage);
         break;
     }
   }

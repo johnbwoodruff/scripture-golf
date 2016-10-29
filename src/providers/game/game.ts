@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GameOptionsConfig, Player } from '../../models';
+import { GameOptionsConfig, Player } from '../../models/index';
 import 'rxjs/add/operator/map';
 
 /*
@@ -16,6 +16,17 @@ export class Game {
   public currentPlayer: number;
 
   constructor() {}
+
+  public restartGame() {
+    this.options = {
+      numPlayers: 1,
+      numRounds: 1,
+      sameScriptures: 'true'
+    };
+    this.players = [];
+    this.currentPlayer = 1;
+    this.currentRound = 1;
+  }
 
   public configure(options: GameOptionsConfig) {
     this.options = options;

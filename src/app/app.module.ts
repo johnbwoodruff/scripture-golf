@@ -8,11 +8,10 @@ import { GameGameplay } from '../pages/game/game-gameplay/game-gameplay';
 import { GameOptions } from '../pages/game/game-options/game-options';
 import { GameResults } from '../pages/game/game-results/game-results';
 import { HomePage } from '../pages/home/home';
-import { LeaderboardPage } from '../pages/leaderboard/leaderboard';
 import { SettingsPage } from '../pages/settings/settings';
 import { StatsPage } from '../pages/stats/stats';
-import { BookPipe } from '../pipes';
-import { FacebookAuth, Game, Scriptures, SgToast, Sql } from '../providers';
+import { BookPipe } from '../pipes/index';
+import { FacebookAuth, Game, Scriptures, SgToast, Sql } from '../providers/index';
 
 const cloudSettings: CloudSettings = {
   'core': {
@@ -30,7 +29,6 @@ const cloudSettings: CloudSettings = {
     GameGameplay,
     GameOptions,
     GameResults,
-    LeaderboardPage,
     SettingsPage,
     StatsPage
   ],
@@ -44,7 +42,6 @@ const cloudSettings: CloudSettings = {
     AboutPage,
     HomePage,
     GamePage,
-    LeaderboardPage,
     SettingsPage,
     StatsPage
   ],

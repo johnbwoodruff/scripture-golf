@@ -2,11 +2,11 @@ import {Component, ViewChild} from '@angular/core';
 import {Http} from '@angular/http';
 import {Platform, Nav, AlertController} from 'ionic-angular';
 import {Auth, User} from '@ionic/cloud-angular';
-import {StatusBar} from 'ionic-native';
+import {StatusBar, GoogleAnalytics, AppVersion} from 'ionic-native';
 import {HomePage} from '../pages/home/home';
 import {AboutPage} from '../pages/about/about';
 import {SettingsPage} from '../pages/settings/settings';
-import {SgToast, Scriptures} from '../providers';
+import {SgToast, Scriptures} from '../providers/index';
 
 @Component({
   templateUrl: 'app.html',
@@ -19,6 +19,11 @@ export class MyApp {
   currUser: any;
 
   constructor(public platform: Platform, public auth: Auth, public user: User, public toastService: SgToast, public alertCtrl: AlertController, public http: Http, public scriptures: Scriptures) {
+    this.currUser = {
+      id: '0',
+      name: ''
+    };
+
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -27,33 +32,31 @@ export class MyApp {
       { title: 'Settings', component: SettingsPage },
       { title: 'About', component: AboutPage }
     ];
-
-    if(this.auth.isAuthenticated()) {
-      this.currUser = {
-        id: this.user.social.facebook.uid,
-        name: this.user.social.facebook.data.full_name,
-        photo: this.user.social.facebook.data.profile_picture
-      };
-    }
-    else {
-      this.currUser = {
-        id: '0',
-        name: ''
-      };
-    }
-
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
+      GoogleAnalytics.startTrackerWithId('UA-46243905-10').then(() => {
+        console.log('STARTED TRACKING VIA GOOGLE ANALYTICS');
+        AppVersion.getVersionNumber().then((version) => {
+          console.log('SET APP VERSION IN ANALYTICS: ' + version);
+          GoogleAnalytics.setAppVersion(version);
+        });
+      });
       StatusBar.backgroundColorByHexString('#36601C');
       StatusBar.styleLightContent();
 
       this.setupDatabase();
 
       this.listenForBackButton();
+
+      if(this.auth.isAuthenticated()) {
+        this.currUser = {
+          id: this.user.social.facebook.uid,
+          name: this.user.social.facebook.data.full_name,
+          photo: this.user.social.facebook.data.profile_picture
+        };
+      }
     });
   }
 

@@ -1,29 +1,24 @@
-import { Injectable } from '@angular/core';
-import { Platform } from 'ionic-angular';
-import { SQLite } from 'ionic-native';
+import { Injectable } from "@angular/core";
 
 const DB_NAME: string = '__ionicstorage';
 const win: any = window;
 
 @Injectable()
 export class Sql {
-  _db: any;
+  private _db: any;
 
-  constructor(public platform: Platform) {
-    if (this.platform.is('cordova')) {
-      this._db = new SQLite();
-      this._db.openDatabase({
+  constructor() {
+    if (win.sqlitePlugin) {
+      this._db = win.sqlitePlugin.openDatabase({
         name: DB_NAME,
-        location: 2
-      }).then(() => {
-        this._tryInit();
+        location: 2,
+        createFromLocation: 0
       });
-    }
-    else {
+    } else {
       console.warn('Storage: SQLite plugin not installed, falling back to WebSQL. Make sure to install cordova-sqlite-storage in production!');
       this._db = win.openDatabase(DB_NAME, '1.0', 'database', 5 * 1024 * 1024);
-      this._tryInit();
     }
+    this._tryInit();
   }
 
   // Initialize the DB with our required tables
@@ -49,7 +44,8 @@ export class Sql {
           tx.executeSql(query, params,
             (tx: any, res: any) => resolve({ tx: tx, res: res }),
             (tx: any, err: any) => reject({ tx: tx, err: err }));
-        }, (err: any) => reject({ err: err }));
+        },
+          (err: any) => reject({ err: err }));
       } catch (err) {
         reject({ err: err });
       }
@@ -62,7 +58,7 @@ export class Sql {
    * @return {Promise} that resolves or rejects with an object of the form { tx: Transaction, res: Result (or err)}
    */
   get(key: string): Promise<any> {
-    return this.query('SELECT key, value FROM kv WHERE key = ? LIMIT 1', [key]).then(data => {
+    return this.query('select key, value from kv where key = ? limit 1', [key]).then(data => {
       if (data.res.rows.length > 0) {
         return data.res.rows.item(0).value;
       }
@@ -76,7 +72,7 @@ export class Sql {
    * @return {Promise} that resolves or rejects with an object of the form { tx: Transaction, res: Result (or err)}
    */
   set(key: string, value: string): Promise<any> {
-    return this.query('INSERT OR REPLACE INTO kv(key, value) VALUES (?, ?)', [key, value]);
+    return this.query('insert or replace into kv(key, value) values (?, ?)', [key, value]);
   }
 
   /**
@@ -85,7 +81,7 @@ export class Sql {
    * @return {Promise} that resolves or rejects with an object of the form { tx: Transaction, res: Result (or err)}
    */
   remove(key: string): Promise<any> {
-    return this.query('DELETE FROM kv WHERE key = ?', [key]);
+    return this.query('delete from kv where key = ?', [key]);
   }
 
   /**
@@ -93,7 +89,6 @@ export class Sql {
    * @return {Promise} that resolves or rejects with an object of the form { tx: Transaction, res: Result (or err)}
    */
   clear(): Promise<any> {
-    return this.query('DELETE FROM kv');
+    return this.query('delete from kv');
   }
-
 }

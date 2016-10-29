@@ -23,7 +23,7 @@
   </ion-content>
   <ion-footer>
     <ion-toolbar color="white" position="bottom">
-      <img *ngIf="!currUser.photo" class="profile-photo" src="../assets/images/ghost.png" alt="Profile Photo">
+      <img *ngIf="!currUser.photo" class="profile-photo" src="assets/img/ghost.png" alt="Profile Photo">
       <img *ngIf="currUser.photo" class="profile-photo" src="{{currUser.photo}}" alt="Profile Photo">
       <p class="profile-name">
         <span *ngIf="currUser.name!==''">{{currUser.name}}</span>

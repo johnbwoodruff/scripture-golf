@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Book } from '../../models';
+import { Book } from '../../models/index';
 
 /*
  * Returns the books associated with a specific key

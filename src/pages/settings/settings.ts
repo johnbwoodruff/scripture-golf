@@ -1,8 +1,7 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
-import {Sql} from '../../providers';
-import {Settings} from '../../models';
-import {SgToast} from '../../providers/sg-toast/sg-toast';
+import {Sql, SgToast} from '../../providers/index';
+import {Settings} from '../../models/index';
 
 /*
   Generated class for the SettingsPage page.
@@ -45,6 +44,16 @@ export class SettingsPage {
   }
 
   eraseData() {
-    this.toastService.showToast('Feature not implemented yet');
+    this.storage.clear().then(() => {
+      this.settings = {
+        bookOfMormon: true,
+        doctrineAndCovenants: true,
+        pearlOfGreatPrice: true,
+        newTestament: true,
+        oldTestament: true
+      };
+      this.saveSettings();
+      this.toastService.showToast('Data successfully cleared!');
+    });
   }
 }

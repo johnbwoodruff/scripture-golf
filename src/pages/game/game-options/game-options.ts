@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { Auth, User } from '@ionic/cloud-angular';
-import { Game } from '../../../providers';
-import { Player } from '../../../models';
+import { Game } from '../../../providers/index';
+import { Player } from '../../../models/index';
 
 @Component({
   selector: 'game-options',

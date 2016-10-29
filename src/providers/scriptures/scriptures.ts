@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Sql } from '../sql/sql';
-import { Scripture, Book } from '../../models';
+import { Scripture, Book } from '../../models/index';
 import 'rxjs/add/operator/map';
 
 /*
@@ -35,7 +35,7 @@ export class Scriptures {
           }
           else {
             let sql: string[];
-            this.http.get('../../assets/db/books.sql').subscribe((data) => {
+            this.http.get('assets/db/books.sql').subscribe((data) => {
               sql = data.text().split('\n');
               for(let statement of sql) {
                 if(statement !== '') {
@@ -59,7 +59,7 @@ export class Scriptures {
           }
           else {
             let sql: string[];
-            this.http.get('../../assets/db/scriptures.sql').subscribe((data) => {
+            this.http.get('assets/db/scriptures.sql').subscribe((data) => {
               sql = data.text().split('\n');
               for(let statement of sql) {
                 if(statement !== '') {

@@ -56,4 +56,4 @@ $ionicons-font-path: "../assets/fonts";
 @import "ionicons";
 
 // WORKAROUND: This is because of an issue with the ionic build system currently being worked on.
-@import "./global.scss";
+@import "./app.scss";

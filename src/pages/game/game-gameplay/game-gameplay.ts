@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { AlertOptions, AlertController } from 'ionic-angular';
-import { Game, Scriptures, SgToast } from '../../../providers';
-import { Scripture, Player, Book } from '../../../models';
+import { Game, Scriptures, SgToast } from '../../../providers/index';
+import { Scripture, Player, Book } from '../../../models/index';
 
 const GUESSING_STATE_BOOK = 'BOOK';
 const GUESSING_STATE_CHAPTER = 'CHAPTER';
