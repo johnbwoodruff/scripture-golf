@@ -37,6 +37,28 @@ $colors: (
   white:      #FFFFFF
 );
 
+
+// App iOS Variables
+// --------------------------------------------------
+// iOS only Sass variables can go here
+
+
+
+
+// App Material Design Variables
+// --------------------------------------------------
+// Material Design only Sass variables can go here
+
+
+
+
+// App Windows Variables
+// --------------------------------------------------
+// Windows only Sass variables can go here
+
+
+
+
 // App Theme
 // --------------------------------------------------
 // Ionic apps can have different themes applied, which can
@@ -54,6 +76,3 @@ $colors: (
 
 $ionicons-font-path: "../assets/fonts";
 @import "ionicons";
-
-// WORKAROUND: This is because of an issue with the ionic build system currently being worked on.
-@import "./app.scss";
