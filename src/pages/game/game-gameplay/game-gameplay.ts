@@ -120,8 +120,6 @@ export class GameGameplay {
 
   changeScripture() {
     this.currScripture = this.scriptures[this.currScriptureIndex];
-    // TODO: Remove this
-    console.log(this.currScripture);
   }
 
   selectionChanged(select: string) {
@@ -210,7 +208,6 @@ export class GameGameplay {
   }
 
   nextPlayer() {
-    // TODO: MAKE IT A DIALOG BOX THAT DOESN'T MOVE ON TO THE NEXT ROUND, PASS TO THE NEXT PLAYER
     // Set state to next player (and round if applicable)
     this.gameCtrl.nextPlayer();
     // Get the new current player
@@ -236,7 +233,6 @@ export class GameGameplay {
   endRound() {
     // Persist player to the game controller
     this.gameCtrl.savePlayer(this.currPlayer);
-    // TODO: If game ends, rather than move to next player, should end game
     if (this.currRound === this.numRounds && this.currPlayer === this.gameCtrl.getPlayer(this.numPlayers)) {
       // GAME IS OVER
       this.finishGame();

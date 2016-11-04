@@ -26,8 +26,7 @@ export class HomePage {
       });
     }
     else {
-      // TODO: CHANGE THIS TO FALSE WHEN RELEASING
-      this.isAuthenticated = true;
+      this.isAuthenticated = false;
     }
   }
 

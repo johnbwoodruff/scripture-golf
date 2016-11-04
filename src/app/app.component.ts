@@ -8,17 +8,13 @@ import {AboutPage} from '../pages/about/about';
 import {SettingsPage} from '../pages/settings/settings';
 import {SgToast, Scriptures} from '../providers/index';
 
-//TODO: REMOVE WHEN DEPLOYING
-import { StatsPage } from '../pages/stats/stats';
-
 @Component({
   templateUrl: 'app.html',
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  // TODO: Make this HomePage
-  rootPage: any = StatsPage;
+  rootPage: any = HomePage;
   pages: Array<{title: string, component: any}>;
   currUser: any;
 

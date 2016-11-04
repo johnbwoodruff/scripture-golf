@@ -20,10 +20,12 @@
     <ion-icon name="ios-game-controller-b"></ion-icon>
     PLAY NOW
   </button>
-  <button ion-button [disabled]="!isAuthenticated" icon-left block large margin-bottom (click)="openPage('stats')">
+  <!--TODO: Change [disabled]="true" to [disabled]="!isAuthenticated" when Stats Page is ready-->
+  <button ion-button [disabled]="true" icon-left block large margin-bottom (click)="openPage('stats')">
     <ion-icon name="podium"></ion-icon>
     YOUR STATS
   </button>
-  <h6 text-center margin-top color="gray">Sign in to track your stats</h6>
+  <!--<h6 text-center margin-top color="gray">Sign in to track your stats</h6>-->
+  <h6 text-center margin-top color="gray">Stats Coming Soon</h6>
 
 </ion-content>
