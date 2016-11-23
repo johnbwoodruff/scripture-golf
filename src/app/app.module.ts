@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { IonicApp, IonicModule } from 'ionic-angular';
+import { NgModule, ErrorHandler } from '@angular/core';
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import { MyApp } from './app.component';
 import { AboutPage } from '../pages/about/about';
@@ -46,6 +46,7 @@ const cloudSettings: CloudSettings = {
     StatsPage
   ],
   providers: [
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
     FacebookAuth,
     Game,
     Scriptures,

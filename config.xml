@@ -101,4 +101,6 @@
   <plugin name="cordova-plugin-wkwebview-engine" spec="https://github.com/driftyco/cordova-plugin-wkwebview-engine.git"/>
   <icon src="resources/android/icon/drawable-xhdpi-icon.png"/>
   <allow-navigation href="http://10.2.12.227:8100"/>
+  <allow-navigation href="http://10.2.12.73:8000"/>
+  <allow-navigation href="http://10.2.13.34:8000"/>
 </widget>
