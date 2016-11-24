@@ -24,7 +24,9 @@ export class MyApp {
       name: ''
     };
 
-    this.initializeApp();
+    this.platform.ready().then(() => {
+      this.initializeApp();
+    });
 
     // used for an example of ngFor and navigation
     this.pages = [
@@ -35,29 +37,27 @@ export class MyApp {
   }
 
   initializeApp() {
-    this.platform.ready().then(() => {
-      GoogleAnalytics.startTrackerWithId('UA-46243905-10').then(() => {
-        console.log('STARTED TRACKING VIA GOOGLE ANALYTICS');
-        AppVersion.getVersionNumber().then((version) => {
-          console.log('SET APP VERSION IN ANALYTICS: ' + version);
-          GoogleAnalytics.setAppVersion(version);
-        });
+    GoogleAnalytics.startTrackerWithId('UA-46243905-10').then(() => {
+      console.log('STARTED TRACKING VIA GOOGLE ANALYTICS');
+      AppVersion.getVersionNumber().then((version) => {
+        console.log('SET APP VERSION IN ANALYTICS: ' + version);
+        GoogleAnalytics.setAppVersion(version);
       });
-      StatusBar.backgroundColorByHexString('#36601C');
-      StatusBar.styleLightContent();
-
-      this.setupDatabase();
-
-      this.listenForBackButton();
-
-      if(this.auth.isAuthenticated()) {
-        this.currUser = {
-          id: this.user.social.facebook.uid,
-          name: this.user.social.facebook.data.full_name,
-          photo: this.user.social.facebook.data.profile_picture
-        };
-      }
     });
+    StatusBar.backgroundColorByHexString('#36601C');
+    StatusBar.styleLightContent();
+
+    this.setupDatabase();
+
+    this.listenForBackButton();
+
+    if(this.auth.isAuthenticated()) {
+      this.currUser = {
+        id: this.user.social.facebook.uid,
+        name: this.user.social.facebook.data.full_name,
+        photo: this.user.social.facebook.data.profile_picture
+      };
+    }
   }
 
   listenForBackButton() {

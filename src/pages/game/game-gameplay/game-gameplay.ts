@@ -167,7 +167,8 @@ export class GameGameplay {
 
   checkChapter() {
     if (this.chapterGuess) {
-      if (this.chapterGuess === this.currScripture.chapter) {
+      // TODO: Make this triple-equals when I can use a number input again.
+      if (this.chapterGuess == this.currScripture.chapter) {
         // Answer is correct, end current player's turn
         this.toastService.showToast('Correct! Well done!');
         this.endRound();
