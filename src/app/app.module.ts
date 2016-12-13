@@ -11,11 +11,16 @@ import { HomePage } from '../pages/home/home';
 import { SettingsPage } from '../pages/settings/settings';
 import { StatsPage } from '../pages/stats/stats';
 import { BookPipe } from '../pipes/index';
-import { FacebookAuth, Game, Scriptures, SgToast, Sql } from '../providers/index';
+import { Game, Scriptures, SgToast, Sql } from '../providers/index';
 
 const cloudSettings: CloudSettings = {
   'core': {
     'app_id': '0280dc86'
+  },
+  'auth': {
+    'facebook': {
+      'scope': ['email', 'public_profile']
+    }
   }
 };
 
@@ -47,7 +52,6 @@ const cloudSettings: CloudSettings = {
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    FacebookAuth,
     Game,
     Scriptures,
     SgToast,

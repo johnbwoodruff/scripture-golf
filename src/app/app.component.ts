@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {Http} from '@angular/http';
 import {Platform, Nav, AlertController} from 'ionic-angular';
-import {Auth, User} from '@ionic/cloud-angular';
+import {FacebookAuth, User} from '@ionic/cloud-angular';
 import {StatusBar, GoogleAnalytics, AppVersion} from 'ionic-native';
 import {HomePage} from '../pages/home/home';
 import {AboutPage} from '../pages/about/about';
@@ -18,7 +18,7 @@ export class MyApp {
   pages: Array<{title: string, component: any}>;
   currUser: any;
 
-  constructor(public platform: Platform, public auth: Auth, public user: User, public toastService: SgToast, public alertCtrl: AlertController, public http: Http, public scriptures: Scriptures) {
+  constructor(public platform: Platform, public facebookAuth: FacebookAuth, public user: User, public toastService: SgToast, public alertCtrl: AlertController, public http: Http, public scriptures: Scriptures) {
     this.currUser = {
       id: '0',
       name: ''
@@ -51,7 +51,7 @@ export class MyApp {
 
     this.listenForBackButton();
 
-    if(this.auth.isAuthenticated()) {
+    if(this.user.social.facebook.uid) {
       this.currUser = {
         id: this.user.social.facebook.uid,
         name: this.user.social.facebook.data.full_name,
@@ -90,7 +90,7 @@ export class MyApp {
   }
 
   authenticate() {
-    this.auth.login('facebook').then(() => {
+    this.facebookAuth.login().then(() => {
       this.currUser = {
         id: this.user.social.facebook.uid,
         name: this.user.social.facebook.data.full_name,
@@ -101,7 +101,7 @@ export class MyApp {
   }
 
   logout() {
-    this.auth.logout();
+    this.facebookAuth.logout();
     this.currUser = {
       id: '0',
       name: ''
