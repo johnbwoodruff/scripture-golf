@@ -3,12 +3,6 @@ import {NavController} from 'ionic-angular';
 import {Sql, SgToast} from '../../providers/index';
 import {Settings} from '../../models/index';
 
-/*
-  Generated class for the SettingsPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'settings-page',
   templateUrl: 'settings.html'

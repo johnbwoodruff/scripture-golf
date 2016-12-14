@@ -14,7 +14,7 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content no-bounce>
   <game-options *ngIf="currentState==='OPTIONS'" (onStartGame)="startGame($event)"></game-options>
   <game-gameplay *ngIf="currentState==='GAMEPLAY'" (onFinishGame)="finishGame($event)"></game-gameplay>
   <game-results *ngIf="currentState==='RESULTS'" (onEndResults)="endResults($event)"></game-results>

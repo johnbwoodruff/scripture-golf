@@ -2,12 +2,6 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { ToastController, ToastOptions, Platform } from 'ionic-angular';
 
-/*
-  Generated class for the SgToast provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 @Injectable()
 export class SgToast {
 
@@ -21,9 +15,10 @@ export class SgToast {
       position: 'top',
       closeButtonText: 'OK'
     };
-    if(this.platform.is('ios')) {
-      toastConfig.position = 'bottom';
-    }
+    // TODO: Determine the best place for this on ios
+    // if(this.platform.is('ios')) {
+    //   toastConfig.position = 'bottom';
+    // }
     if(!showCloseButton) {
       toastConfig.duration = 3000;
     }

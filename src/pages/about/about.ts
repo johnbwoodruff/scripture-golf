@@ -1,13 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, Platform } from 'ionic-angular';
 import { AppVersion/*, AppRate*/ } from 'ionic-native';
+import { SgToast } from '../../providers';
 
-/*
-  Generated class for the AboutPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'about-page',
   templateUrl: 'about.html'
@@ -16,7 +11,7 @@ export class AboutPage {
   appName: string;
   appVersion: string;
 
-  constructor(public navCtrl: NavController, public platform: Platform) {
+  constructor(public navCtrl: NavController, public platform: Platform, public toastCtrl: SgToast) {
     if(this.platform.is('cordova')) {
       AppVersion.getAppName().then((name) => {
         this.appName = name;
@@ -34,5 +29,9 @@ export class AboutPage {
       this.appName = 'Scripture Golf';
       this.appVersion = '1.0.0';
     }
+  }
+
+  reviewApp() {
+    this.toastCtrl.showToast('This feature is disabled during beta');
   }
 }
