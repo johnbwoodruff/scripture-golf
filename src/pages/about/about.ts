@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController, Platform } from 'ionic-angular';
-import { AppVersion/*, AppRate*/ } from 'ionic-native';
+import { AppVersion, AppRate } from 'ionic-native';
 import { SgToast } from '../../providers';
+
+AppRate.preferences.storeAppURL = {
+  ios: '1186113597'
+};
 
 @Component({
   selector: 'about-page',
@@ -19,11 +23,6 @@ export class AboutPage {
       AppVersion.getVersionNumber().then((version) => {
         this.appVersion = version;
       });
-      // TODO: Add in app rating once there are ids for the app in each store
-      // AppRate.preferences.storeAppURL = {
-      //   ios: '<my_app_id>',
-      //   android: 'market://details?id=<package_name>',
-      // };
     }
     else {
       this.appName = 'Scripture Golf';
@@ -33,5 +32,7 @@ export class AboutPage {
 
   reviewApp() {
     this.toastCtrl.showToast('This feature is disabled during beta');
+    // TODO: Uncomment this before full release
+    // AppRate.promptForRating(false);
   }
 }
