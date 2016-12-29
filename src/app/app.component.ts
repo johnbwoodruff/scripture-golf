@@ -1,7 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {Http} from '@angular/http';
 import {Platform, Nav, AlertController} from 'ionic-angular';
-import {FacebookAuth, User} from '@ionic/cloud-angular';
 import {StatusBar, GoogleAnalytics, AppVersion} from 'ionic-native';
 import {HomePage} from '../pages/home/home';
 import {AboutPage} from '../pages/about/about';
@@ -16,14 +15,8 @@ export class MyApp {
 
   rootPage: any = HomePage;
   pages: Array<{title: string, component: any}>;
-  currUser: any;
 
-  constructor(public platform: Platform, public facebookAuth: FacebookAuth, public user: User, public toastService: SgToast, public alertCtrl: AlertController, public http: Http, public scriptures: Scriptures) {
-    this.currUser = {
-      id: '0',
-      name: ''
-    };
-
+  constructor(public platform: Platform, public toastService: SgToast, public alertCtrl: AlertController, public http: Http, public scriptures: Scriptures) {
     this.platform.ready().then(() => {
       this.initializeApp();
     });
@@ -50,14 +43,6 @@ export class MyApp {
     this.setupDatabase();
 
     this.listenForBackButton();
-
-    if(this.user.social.facebook.uid) {
-      this.currUser = {
-        id: this.user.social.facebook.uid,
-        name: this.user.social.facebook.data.full_name,
-        photo: this.user.social.facebook.data.profile_picture
-      };
-    }
   }
 
   listenForBackButton() {
@@ -87,26 +72,6 @@ export class MyApp {
         this.nav.pop();
       }
     }, 1000);
-  }
-
-  authenticate() {
-    this.facebookAuth.login().then(() => {
-      this.currUser = {
-        id: this.user.social.facebook.uid,
-        name: this.user.social.facebook.data.full_name,
-        photo: this.user.social.facebook.data.profile_picture
-      };
-      this.toastService.showToast('Successfully signed in');
-    });
-  }
-
-  logout() {
-    this.facebookAuth.logout();
-    this.currUser = {
-      id: '0',
-      name: ''
-    };
-    this.toastService.showToast('Successfully signed out');
   }
 
   openPage(page: any) {

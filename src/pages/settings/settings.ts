@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {Sql, SgToast} from '../../providers/index';
 import {Settings} from '../../models/index';
+import {HomePage} from '../home/home';
 
 @Component({
   selector: 'settings-page',
@@ -49,5 +50,13 @@ export class SettingsPage {
       this.saveSettings();
       this.toastService.showToast('Data successfully cleared!');
     });
+  }
+
+  openPage(page: string) {
+    switch(page) {
+      case 'home':
+        this.nav.setRoot(HomePage);
+        break;
+    }
   }
 }

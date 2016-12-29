@@ -4,7 +4,7 @@ import { SocialSharing } from 'ionic-native';
 import { Game, SgToast } from '../../../providers/index';
 import { Player } from '../../../models/index';
 
-const SG_IMAGE_URL = 'https://scontent.fsnc1-2.fna.fbcdn.net/v/t1.0-9/546832_481226958564464_176895884_n.png?oh=8ba669a95e242d88fbbbdbaf5d16ddec&oe=5893BEAE';
+export const SG_IMAGE_URL = 'https://scontent.fsnc1-2.fna.fbcdn.net/v/t1.0-9/546832_481226958564464_176895884_n.png?oh=8ba669a95e242d88fbbbdbaf5d16ddec&oe=5893BEAE';
 
 @Component({
   selector: 'game-results',
@@ -44,7 +44,9 @@ export class GameResults {
       message = `I defeated ${this.numPlayers - 1} other players in a game of Scripture Golf! #ScriptureGolf`;
     }
     SocialSharing.share(message, 'Scripture Golf', SG_IMAGE_URL, 'https://www.facebook.com/ldsscripturegolf/').then(() => {
-      this.toastCtrl.showToast('Thanks for sharing!');
+      console.log('Shared');
+    }).catch(() => {
+      this.toastCtrl.showToast('Cannot share at this time');
     });
   }
 

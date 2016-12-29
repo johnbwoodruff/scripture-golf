@@ -37,7 +37,15 @@ export class GamePage {
     }
     else {
       // Go Home
-      this.navCtrl.setRoot(HomePage);
+      this.openPage('home');
+    }
+  }
+
+  openPage(page: string) {
+    switch(page) {
+      case 'home':
+        this.navCtrl.setRoot(HomePage);
+        break;
     }
   }
 }

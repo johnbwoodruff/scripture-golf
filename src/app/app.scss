@@ -1,6 +1,4 @@
 // http://ionicframework.com/docs/v2/theming/
-
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -14,42 +12,51 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
-
 h1 {
   font-weight: 400;
 }
-h3, h4 {
+
+h3,
+h4 {
   font-weight: 300;
 }
+
 a {
   text-decoration: none;
 }
 
 scroll-content {
-  overflow-y:auto;
+  overflow-y: auto;
 }
 
 .margin-none {
   margin: 0 !important;
 }
+
 .margin-top-small {
   margin-top: 15px;
 }
+
 .margin-bottom-small {
   margin-bottom: 15px;
 }
+
 .margin-left-xsmall {
   margin-left: 5px;
 }
+
 .margin-bottom-none {
   margin-bottom: 0;
 }
+
 .float-left {
   float: left;
 }
+
 .float-right {
   float: right;
 }
+
 .clear {
   clear: both;
 }
@@ -60,18 +67,26 @@ scroll-content {
 }
 
 .profile-photo {
-    height: 30px;
-    vertical-align: middle;
-    display: inline-block;
-    border-radius: 50%;
-    margin-left: 5px;
+  height: 25px;
+  vertical-align: middle;
+  display: inline-block;
+  border-radius: 50%;
+  margin-left: 5px;
+  border: 1px solid white;
+  box-shadow: black 0px 0px 1px;
 }
+
 .profile-name {
-    display: inline;
-    margin-left: 5px;
+  display: inline;
+  margin-left: 5px;
 }
+
 .align-center {
   margin-left: auto;
   margin-right: auto;
   display: block;
+}
+
+.text-align-center {
+  text-align: center;
 }

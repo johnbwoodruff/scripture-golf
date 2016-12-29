@@ -6,26 +6,44 @@
 -->
 <ion-header>
   <ion-navbar color="primary">
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
+    <ion-buttons left *ngIf="currUser.id!=='0'">
+      <div (click)="openPopover($event)">
+        <img *ngIf="!currUser.photo" class="profile-photo" src="assets/img/ghost.png" alt="Profile Photo">
+        <img *ngIf="currUser.photo" class="profile-photo" src="{{currUser.photo}}" alt="Profile Photo">
+      </div>
+    </ion-buttons>
     <ion-title>Home</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only (click)="openPage('settings')">
+        <ion-icon name="settings"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content no-bounce padding class="home">
   <img class="align-center" src="assets/img/golfer.svg" width="150px" height="150px"/>
   <h1 text-center margin-bottom>Scripture Golf</h1>
-  <button ion-button icon-left block large margin-bottom (click)="openPage('game')">
+  <button ion-button icon-left block large (click)="openPage('game')">
     <ion-icon name="ios-game-controller-b"></ion-icon>
     PLAY NOW
   </button>
   <!--TODO: Change [disabled]="true" to [disabled]="!isAuthenticated" when Stats Page is ready-->
-  <button ion-button [disabled]="true" icon-left block large margin-bottom (click)="openPage('stats')">
-    <ion-icon name="podium"></ion-icon>
-    YOUR STATS
-  </button>
+  <div class="other-home-buttons" padding>
+    <button ion-button color="facebook" icon-left block margin-bottom (click)="authenticate()" *ngIf="currUser.id==='0'">
+      <ion-icon name="logo-facebook"></ion-icon>
+      CONNECT
+    </button>
+    <button ion-button clear icon-left block margin-bottom (click)="openPage('about')">
+      <ion-icon name="information-circle"></ion-icon>
+      ABOUT
+    </button>
+    <!--<button ion-button [disabled]="true" icon-left block margin-bottom (click)="openPage('stats')">
+      <ion-icon name="podium"></ion-icon>
+      YOUR STATS
+    </button>
+    <h6 ion-text text-center margin-top color="gray">Stats Coming Soon</h6>-->
+  </div>
   <!--<h6 text-center margin-top color="gray">Sign in to track your stats</h6>-->
-  <h6 ion-text text-center margin-top color="gray">Stats Coming Soon</h6>
 
 </ion-content>

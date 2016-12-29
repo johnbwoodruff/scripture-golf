@@ -8,6 +8,7 @@ import { GameGameplay } from '../pages/game/game-gameplay/game-gameplay';
 import { GameOptions } from '../pages/game/game-options/game-options';
 import { GameResults } from '../pages/game/game-results/game-results';
 import { HomePage } from '../pages/home/home';
+import { UserPopover } from '../pages/home/user-popover/user-popover';
 import { SettingsPage } from '../pages/settings/settings';
 import { StatsPage } from '../pages/stats/stats';
 import { BookPipe } from '../pipes/index';
@@ -35,7 +36,8 @@ const cloudSettings: CloudSettings = {
     GameOptions,
     GameResults,
     SettingsPage,
-    StatsPage
+    StatsPage,
+    UserPopover
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -48,7 +50,8 @@ const cloudSettings: CloudSettings = {
     HomePage,
     GamePage,
     SettingsPage,
-    StatsPage
+    StatsPage,
+    UserPopover
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

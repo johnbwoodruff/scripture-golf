@@ -6,47 +6,52 @@
 -->
 <ion-header>
   <ion-navbar color="primary">
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
     <ion-title>Settings</ion-title>
+    <ion-buttons right>
+      <button ion-button (click)="openPage('home')">
+        Home
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content no-bounce class="settings">
   <ion-list>
     <ion-list-header>
-      Books of Scripture
+      Books of Scripture (Disabled for now)
     </ion-list-header>
     <ion-item>
       <ion-label>Book of Mormon</ion-label>
-      <ion-toggle [(ngModel)]="settings.bookOfMormon" item-right (ionChange)="saveSettings()"></ion-toggle>
+      <ion-toggle disabled="true" [(ngModel)]="settings.bookOfMormon" item-right (ionChange)="saveSettings()"></ion-toggle>
     </ion-item>
     <ion-item>
       <ion-label>Doctrine and Covenants</ion-label>
-      <ion-toggle [(ngModel)]="settings.doctrineAndCovenants" item-right (ionChange)="saveSettings()"></ion-toggle>
+      <ion-toggle disabled="true" [(ngModel)]="settings.doctrineAndCovenants" item-right (ionChange)="saveSettings()"></ion-toggle>
     </ion-item>
     <ion-item>
       <ion-label>Pearl of Great Price</ion-label>
-      <ion-toggle [(ngModel)]="settings.pearlOfGreatPrice" item-right (ionChange)="saveSettings()"></ion-toggle>
+      <ion-toggle disabled="true" [(ngModel)]="settings.pearlOfGreatPrice" item-right (ionChange)="saveSettings()"></ion-toggle>
     </ion-item>
     <ion-item>
       <ion-label>Old Testament</ion-label>
-      <ion-toggle [(ngModel)]="settings.oldTestament" item-right (ionChange)="saveSettings()"></ion-toggle>
+      <ion-toggle disabled="true" [(ngModel)]="settings.oldTestament" item-right (ionChange)="saveSettings()"></ion-toggle>
     </ion-item>
     <ion-item>
       <ion-label>New Testament</ion-label>
-      <ion-toggle [(ngModel)]="settings.newTestament" item-right (ionChange)="saveSettings()"></ion-toggle>
+      <ion-toggle disabled="true" [(ngModel)]="settings.newTestament" item-right (ionChange)="saveSettings()"></ion-toggle>
     </ion-item>
     <ion-list-header>
-      Data Management
+      Data Management (Disabled for now)
     </ion-list-header>
     <ion-item>
       Erase Data
-      <button ion-button icon-left icon-left color="danger" outline item-right (click)="eraseData()">
+      <button disabled="true" ion-button icon-left icon-left color="danger" outline item-right (click)="eraseData()">
         <ion-icon name="trash"></ion-icon>
         Delete
       </button>
     </ion-item>
   </ion-list>
+  <!--<button ion-button clear>
+    About
+  </button>-->
 </ion-content>

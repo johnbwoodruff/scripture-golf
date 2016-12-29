@@ -71,8 +71,7 @@
         <ion-grid>
           <ion-row>
             <ion-col width-50 offset-25>
-              <!--TODO: CHANGE THIS TO TYPE NUMBER BEFORE PRODUCTION, CAN'T BE ANGULAR 2.1.1-->
-              <input type="text" class="chapter-input" [(ngModel)]="chapterGuess" placeholder="Chapter">
+              <input type="number" pattern="[0-9]*" class="chapter-input" [(ngModel)]="chapterGuess" placeholder="Chapter">
             </ion-col>
           </ion-row>
         </ion-grid>
