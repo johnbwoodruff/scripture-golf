@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { AlertOptions, AlertController } from 'ionic-angular';
+import { AlertOptions, AlertController, Platform } from 'ionic-angular';
 import { Game, Scriptures, SgToast, Sql } from '../../../providers/index';
 import { Scripture, Player, Book, Settings } from '../../../models/index';
 
@@ -32,8 +32,10 @@ export class GameGameplay {
   newTestament: string;
   selectOptions: AlertOptions;
   settings: Settings;
+  isTablet: boolean;
 
-  constructor(public scriptureService: Scriptures, public gameCtrl: Game, public toastService: SgToast, public alertCtrl: AlertController, public storage: Sql) {
+  constructor(public scriptureService: Scriptures, public gameCtrl: Game, public toastService: SgToast, public alertCtrl: AlertController, public storage: Sql, public platform: Platform) {
+    this.isTablet = this.platform.is('tablet');
     this.selectOptions = {
       enableBackdropDismiss: false
     };
@@ -124,6 +126,7 @@ export class GameGameplay {
 
   changeScripture() {
     this.currScripture = this.scriptures[this.currScriptureIndex];
+    console.log(this.currScripture);
   }
 
   selectionChanged(select: string) {

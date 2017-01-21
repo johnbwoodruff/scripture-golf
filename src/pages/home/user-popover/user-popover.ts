@@ -28,17 +28,15 @@ export class UserPopover {
       name: ''
     };
 
-    if(this.platform.is('cordova')) {
-      this.platform.ready().then(() => {
-        if(this.user.social.facebook.uid) {
-          this.currUser = {
-            id: this.user.social.facebook.uid,
-            name: this.user.social.facebook.data.full_name,
-            photo: this.user.social.facebook.data.profile_picture
-          };
-        }
-      });
-    }
+    this.platform.ready().then(() => {
+      if(this.user.social.facebook && this.user.social.facebook.uid) {
+        this.currUser = {
+          id: this.user.social.facebook.uid,
+          name: this.user.social.facebook.data.full_name,
+          photo: this.user.social.facebook.data.profile_picture
+        };
+      }
+    });
   }
 
   close(action) {

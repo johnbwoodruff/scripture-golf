@@ -17,6 +17,7 @@ import {SG_IMAGE_URL} from '../game/game-results/game-results';
 export class HomePage {
   isAuthenticated: boolean;
   currUser: any;
+  isTablet: boolean;
 
   constructor(public nav: NavController, public platform: Platform, public popoverCtrl: PopoverController, public auth: Auth, public user: User, public facebookAuth: FacebookAuth, public toastService: SgToast) {
     this.currUser = {
@@ -24,21 +25,23 @@ export class HomePage {
       name: ''
     };
 
-    if(this.platform.is('cordova')) {
-      this.platform.ready().then(() => {
+    this.platform.ready().then(() => {
+      this.isTablet = this.platform.is('tablet');
+      if(this.platform.is('cordova')) {
         this.isAuthenticated = this.auth.isAuthenticated();
         GoogleAnalytics.trackView('Home Page');
 
-        if(this.user.social.facebook.uid) {
+        if(this.user.social.facebook && this.user.social.facebook.uid) {
           this.currUser = {
             id: this.user.social.facebook.uid,
             name: this.user.social.facebook.data.full_name,
             photo: this.user.social.facebook.data.profile_picture
           };
         }
-      });
-    }
-    else {
+      }
+    });
+
+    if(!this.platform.is('cordova')) {
       this.isAuthenticated = false;
     }
   }

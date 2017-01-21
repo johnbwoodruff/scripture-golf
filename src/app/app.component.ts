@@ -17,9 +17,7 @@ export class MyApp {
   pages: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, public toastService: SgToast, public alertCtrl: AlertController, public http: Http, public scriptures: Scriptures) {
-    this.platform.ready().then(() => {
-      this.initializeApp();
-    });
+    this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
@@ -30,19 +28,23 @@ export class MyApp {
   }
 
   initializeApp() {
-    GoogleAnalytics.startTrackerWithId('UA-46243905-10').then(() => {
-      console.log('STARTED TRACKING VIA GOOGLE ANALYTICS');
-      AppVersion.getVersionNumber().then((version) => {
-        console.log('SET APP VERSION IN ANALYTICS: ' + version);
-        GoogleAnalytics.setAppVersion(version);
-      });
+    this.platform.ready().then(() => {
+      if(this.platform.is('cordova')) {
+        GoogleAnalytics.startTrackerWithId('UA-46243905-10').then(() => {
+          console.log('STARTED TRACKING VIA GOOGLE ANALYTICS');
+          AppVersion.getVersionNumber().then((version) => {
+            console.log('SET APP VERSION IN ANALYTICS: ' + version);
+            GoogleAnalytics.setAppVersion(version);
+          });
+        });
+        StatusBar.backgroundColorByHexString('#36601C');
+        StatusBar.styleLightContent();
+      }
+
+      this.setupDatabase();
+
+      this.listenForBackButton();
     });
-    StatusBar.backgroundColorByHexString('#36601C');
-    StatusBar.styleLightContent();
-
-    this.setupDatabase();
-
-    this.listenForBackButton();
   }
 
   listenForBackButton() {

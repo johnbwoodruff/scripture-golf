@@ -12,8 +12,12 @@ export class AboutPage {
   appVersion: string;
 
   constructor(public navCtrl: NavController, public platform: Platform, public toastCtrl: SgToast) {
-    if(this.platform.is('cordova')) {
-      this.platform.ready().then(() => {
+    if(!this.platform.is('cordova')) {
+      this.appName = 'Scripture Golf';
+      this.appVersion = '1.0.0';
+    }
+    this.platform.ready().then(() => {
+      if(this.platform.is('cordova')) {
         AppVersion.getAppName().then((name) => {
           this.appName = name;
         });
@@ -31,12 +35,8 @@ export class AboutPage {
           rateButtonLabel: 'Rate it!',
           laterButtonLabel: 'Later'
         };
-      });
-    }
-    else {
-      this.appName = 'Scripture Golf';
-      this.appVersion = '1.0.0';
-    }
+      }
+    });
   }
 
   reviewApp() {

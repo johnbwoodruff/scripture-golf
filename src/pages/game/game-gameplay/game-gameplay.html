@@ -1,4 +1,4 @@
-<ion-content no-bounce>
+<ion-content no-bounce [ngClass]="{'tablet-gameplay': isTablet}">
   <div padding>
     <ion-grid>
       <ion-row>
@@ -19,7 +19,7 @@
       </ion-row>
     </ion-grid>
 
-    <ion-card *ngIf="showVerse">
+    <ion-card *ngIf="showVerse" [ngClass]="{'tablet-card': isTablet}">
       <ion-card-content>
         {{currScripture.verse}}
       </ion-card-content>
@@ -77,12 +77,12 @@
         </ion-grid>
         <div>
           <p class="float-left chapters-guessed">Chapters Guessed:</p>
-          <button ion-button color="primary" (click)="checkChapter()" class="float-right margin-bottom" small>Check Answer</button>
+          <button ion-button color="primary" (click)="checkChapter()" class="check-answer-button float-right margin-bottom" small>Check Answer</button>
           <div class="clear"></div>
         </div>
         <div class="guessed-section">
           <span *ngIf="guessedChapters.length===0" class="small-hint">None Yet</span>
-          <span *ngFor="let num of guessedChapters; let i = index">{{num}}<span *ngIf="i+1<guessedChapters.length">,</span>&nbsp;</span>
+          <span *ngFor="let num of guessedChapters; let i = index">{{num}}<span class="comma" *ngIf="i+1<guessedChapters.length">,</span>&nbsp;</span>
         </div>
       </div>
     </div>
