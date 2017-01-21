@@ -30,31 +30,31 @@
           <ion-list-header>
             Book of Scripture
           </ion-list-header>
-          <ion-item>
+          <ion-item *ngIf="settings.bookOfMormon">
             <ion-label>Book of Mormon</ion-label>
             <ion-select class="margin-none" [selectOptions]="selectOptions" placeholder="Choose One" [(ngModel)]="bookOfMormon" (ionChange)="selectionChanged('BOM')">
               <ion-option *ngFor="let book of books | book:'BOM'" value="{{book.title}}">{{book.title}}</ion-option>
             </ion-select>
           </ion-item>
-          <ion-item>
+          <ion-item *ngIf="settings.doctrineAndCovenants">
             <ion-label>Doctrine & Covenants</ion-label>
             <ion-select class="margin-none" [selectOptions]="selectOptions" placeholder="Choose One" [(ngModel)]="doctrineAndCovenants" (ionChange)="selectionChanged('DC')">
               <ion-option *ngFor="let book of books | book:'DC'" value="{{book.title}}">{{book.title}}</ion-option>
             </ion-select>
           </ion-item>
-          <ion-item>
+          <ion-item *ngIf="settings.pearlOfGreatPrice">
             <ion-label>Pearl of Great Price</ion-label>
             <ion-select class="margin-none" [selectOptions]="selectOptions" placeholder="Choose One" [(ngModel)]="pearlOfGreatPrice" (ionChange)="selectionChanged('PGP')">
               <ion-option *ngFor="let book of books | book:'PGP'" value="{{book.title}}">{{book.title}}</ion-option>
             </ion-select>
           </ion-item>
-          <ion-item>
+          <ion-item *ngIf="settings.oldTestament">
             <ion-label>Old Testament</ion-label>
             <ion-select class="margin-none" [selectOptions]="selectOptions" placeholder="Choose One" [(ngModel)]="oldTestament" (ionChange)="selectionChanged('OT')">
               <ion-option *ngFor="let book of books | book:'OT'" value="{{book.title}}">{{book.title}}</ion-option>
             </ion-select>
           </ion-item>
-          <ion-item>
+          <ion-item *ngIf="settings.newTestament">
             <ion-label>New Testament</ion-label>
             <ion-select class="margin-none" [selectOptions]="selectOptions" placeholder="Choose One" [(ngModel)]="newTestament" (ionChange)="selectionChanged('NT')">
               <ion-option *ngFor="let book of books | book:'NT'" value="{{book.title}}">{{book.title}}</ion-option>

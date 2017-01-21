@@ -41,7 +41,7 @@ export class GameResults {
       message = `I scored ${this.winningPlayer.getScore()} in a game of Scripture Golf! #ScriptureGolf`;
     }
     else {
-      message = `I defeated ${this.numPlayers - 1} other players in a game of Scripture Golf! #ScriptureGolf`;
+      message = `Just finished a game of #ScriptureGolf with my friends!`;
     }
     SocialSharing.share(message, 'Scripture Golf', SG_IMAGE_URL, 'https://www.facebook.com/ldsscripturegolf/').then(() => {
       console.log('Shared');

@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { AlertOptions, AlertController } from 'ionic-angular';
-import { Game, Scriptures, SgToast } from '../../../providers/index';
-import { Scripture, Player, Book } from '../../../models/index';
+import { Game, Scriptures, SgToast, Sql } from '../../../providers/index';
+import { Scripture, Player, Book, Settings } from '../../../models/index';
 
 const GUESSING_STATE_BOOK = 'BOOK';
 const GUESSING_STATE_CHAPTER = 'CHAPTER';
@@ -31,8 +31,9 @@ export class GameGameplay {
   oldTestament: string;
   newTestament: string;
   selectOptions: AlertOptions;
+  settings: Settings;
 
-  constructor(public scriptureService: Scriptures, public gameCtrl: Game, public toastService: SgToast, public alertCtrl: AlertController) {
+  constructor(public scriptureService: Scriptures, public gameCtrl: Game, public toastService: SgToast, public alertCtrl: AlertController, public storage: Sql) {
     this.selectOptions = {
       enableBackdropDismiss: false
     };
@@ -46,11 +47,15 @@ export class GameGameplay {
     this.numPlayers = this.gameCtrl.getOptions().numPlayers;
     this.numRounds = this.gameCtrl.getOptions().numRounds;
     this.sameScriptures = this.gameCtrl.getOptions().sameScriptures;
-    console.log(this.sameScriptures);
     this.getBooks();
     this.selectScriptures().then((successful) => {
       if (successful) {
         this.startGame();
+      }
+    });
+    this.storage.get('settings').then((data) => {
+      if(data) {
+        this.settings = JSON.parse(data);
       }
     });
   }
@@ -75,7 +80,6 @@ export class GameGameplay {
       this.scriptureService.getScriptures().then((data) => {
         // Ensure scriptures are sufficiently randomized.
         allScriptures = this.shuffle(data);
-        console.log(this.sameScriptures);
         if (this.sameScriptures === 'true') {
           numScriptures = this.numRounds;
         }

@@ -10,6 +10,7 @@ import {HomePage} from '../home/home';
 })
 export class SettingsPage {
   settings: Settings;
+  disabled: Settings;
 
   constructor(public nav: NavController, public storage: Sql, public toastService: SgToast) {
     this.settings = {
@@ -18,6 +19,13 @@ export class SettingsPage {
       pearlOfGreatPrice: true,
       oldTestament: true,
       newTestament: true
+    };
+    this.disabled = {
+      bookOfMormon: false,
+      doctrineAndCovenants: false,
+      pearlOfGreatPrice: false,
+      oldTestament: false,
+      newTestament: false
     };
 
     this.getSettings();
@@ -29,7 +37,7 @@ export class SettingsPage {
         this.settings = JSON.parse(data);
       }
       else {
-        this.saveSettings(null);
+        this.saveSettings();
       }
     });
   }
@@ -54,27 +62,35 @@ export class SettingsPage {
     return count;
   }
 
-  saveSettings(book: string) {
-    if(this.countOnSettings() < 2) {
-      this.toastService.showToast('Minimum of 2 volumes required');
-      switch(book) {
-        case 'BOM':
-          this.settings.bookOfMormon = true;
-          break;
-        case 'DC':
-          this.settings.doctrineAndCovenants = true;
-          break;
-        case 'PGP':
-          this.settings.pearlOfGreatPrice = true;
-          break;
-        case 'OT':
-          this.settings.oldTestament = true;
-          break;
-        case 'NT':
-          this.settings.newTestament = true;
+  saveSettings() {
+    let num = this.countOnSettings();
+    if(num === 2) {
+      if(this.settings.bookOfMormon) {
+        this.disabled.bookOfMormon = true;
+      }
+      if(this.settings.doctrineAndCovenants) {
+        this.disabled.doctrineAndCovenants = true;
+      }
+      if(this.settings.newTestament) {
+        this.disabled.newTestament = true;
+      }
+      if(this.settings.oldTestament) {
+        this.disabled.oldTestament = true;
+      }
+      if(this.settings.pearlOfGreatPrice) {
+        this.disabled.pearlOfGreatPrice = true;
       }
     }
-    else {
+    else if(num > 2) {
+      this.disabled = {
+        bookOfMormon: false,
+        doctrineAndCovenants: false,
+        pearlOfGreatPrice: false,
+        oldTestament: false,
+        newTestament: false
+      };
+    }
+    if(num >= 2) {
       this.storage.set('settings', JSON.stringify(this.settings));
     }
   }
@@ -88,8 +104,8 @@ export class SettingsPage {
         newTestament: true,
         oldTestament: true
       };
-      this.saveSettings(null);
-      this.toastService.showToast('Data successfully cleared!');
+      this.saveSettings();
+      this.toastService.showToast('Settings successfully reset.');
     });
   }
 

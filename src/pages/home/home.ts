@@ -88,7 +88,6 @@ export class HomePage {
       ev: event
     });
     popover.onDidDismiss((action) => {
-      console.log(action);
       if(action === 'logout') {
         this.logout();
       }
