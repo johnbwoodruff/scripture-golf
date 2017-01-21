@@ -88,3 +88,4 @@ INSERT INTO books(key,title) VALUES ('DC','Sections 100-119');
 INSERT INTO books(key,title) VALUES ('DC','Sections 120-138');
 INSERT INTO books(key,title) VALUES ('PGP','Moses');
 INSERT INTO books(key,title) VALUES ('PGP','Abraham');
+INSERT INTO books(key,title) VALUES ('PGP','Articles of Faith');

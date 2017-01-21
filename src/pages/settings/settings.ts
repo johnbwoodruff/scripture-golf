@@ -29,13 +29,54 @@ export class SettingsPage {
         this.settings = JSON.parse(data);
       }
       else {
-        this.saveSettings();
+        this.saveSettings(null);
       }
     });
   }
 
-  saveSettings() {
-    this.storage.set('settings', JSON.stringify(this.settings));
+  countOnSettings(): number {
+    let count = 0;
+    if(this.settings.bookOfMormon) {
+      count++;
+    }
+    if(this.settings.doctrineAndCovenants) {
+      count++;
+    }
+    if(this.settings.newTestament) {
+      count++;
+    }
+    if(this.settings.oldTestament) {
+      count++;
+    }
+    if(this.settings.pearlOfGreatPrice) {
+      count++;
+    }
+    return count;
+  }
+
+  saveSettings(book: string) {
+    if(this.countOnSettings() < 2) {
+      this.toastService.showToast('Minimum of 2 volumes required');
+      switch(book) {
+        case 'BOM':
+          this.settings.bookOfMormon = true;
+          break;
+        case 'DC':
+          this.settings.doctrineAndCovenants = true;
+          break;
+        case 'PGP':
+          this.settings.pearlOfGreatPrice = true;
+          break;
+        case 'OT':
+          this.settings.oldTestament = true;
+          break;
+        case 'NT':
+          this.settings.newTestament = true;
+      }
+    }
+    else {
+      this.storage.set('settings', JSON.stringify(this.settings));
+    }
   }
 
   eraseData() {
@@ -47,7 +88,7 @@ export class SettingsPage {
         newTestament: true,
         oldTestament: true
       };
-      this.saveSettings();
+      this.saveSettings(null);
       this.toastService.showToast('Data successfully cleared!');
     });
   }

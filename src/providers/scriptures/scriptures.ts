@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Sql } from '../sql/sql';
-import { Scripture, Book } from '../../models/index';
+import { Scripture, Book, Settings } from '../../models/index';
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -17,8 +17,6 @@ export class Scriptures {
 
   public initializeScriptures(): Promise<boolean> {
     const promise = new Promise((resolve, reject) => {
-      resolve(true);
-
       this.storage.query(`CREATE TABLE IF NOT EXISTS books(
         key TEXT NOT NULL,
         title TEXT NOT NULL
@@ -43,6 +41,7 @@ export class Scriptures {
       });
 
       this.storage.query(`CREATE TABLE IF NOT EXISTS scriptures(
+        volume TEXT NOT NULL,
         book TEXT NOT NULL,
         chapter INTEGER NOT NULL,
         verse TEXT NOT NULL
@@ -69,25 +68,60 @@ export class Scriptures {
     return promise;
   }
 
+  public getScripturesByVolume(volume): Promise<Scripture[]> {
+    let promise = new Promise((resolve, reject) => {
+      this.storage.query(`SELECT * FROM scriptures WHERE volume='${volume}'`).then((response) => {
+        let scriptureList = [];
+        for(let i = 0; i < response.res.rows.length; i++) {
+          scriptureList.push({
+            book: response.res.rows.item(i).book,
+            chapter: response.res.rows.item(i).chapter,
+            verse: response.res.rows.item(i).verse
+          });
+        }
+        resolve(scriptureList);
+      }).catch((err) => {
+        reject();
+      });
+    });
+    return promise;
+  }
+
   public getScriptures(): Promise<Scripture[]> {
     let promise = new Promise((resolve, reject) => {
-      if(this.scriptures.length > 0) {
-        resolve(this.scriptures);
-      }
-      else {
-        this.storage.query('SELECT * FROM scriptures').then((response) => {
-          for(let i = 0; i < response.res.rows.length; i++) {
-            this.scriptures.push({
-              book: response.res.rows.item(i).book,
-              chapter: response.res.rows.item(i).chapter,
-              verse: response.res.rows.item(i).verse
-            });
+      this.storage.get('settings').then((data: string) => {
+        let settings: Settings = JSON.parse(data);
+        let promises = [
+          this.getScripturesByVolume('BOM'),
+          this.getScripturesByVolume('DC'),
+          this.getScripturesByVolume('NT'),
+          this.getScripturesByVolume('OT'),
+          this.getScripturesByVolume('PGP')
+        ];
+
+        Promise.all(promises).then((values) => {
+          // Add scriptures if they are going to be used
+          if(settings.bookOfMormon) {
+            this.scriptures = this.scriptures.concat(values[0]);
+          }
+          if(settings.doctrineAndCovenants) {
+            this.scriptures = this.scriptures.concat(values[1]);
+          }
+          if(settings.newTestament) {
+            this.scriptures = this.scriptures.concat(values[2]);
+          }
+          if(settings.oldTestament) {
+            this.scriptures = this.scriptures.concat(values[3]);
+          }
+          if(settings.pearlOfGreatPrice) {
+            this.scriptures = this.scriptures.concat(values[4]);
           }
           resolve(this.scriptures);
-        }).catch(() => {
+        }).catch((err) => {
+          console.log(err);
           reject();
         });
-      }
+      });
     });
     return promise;
   }
