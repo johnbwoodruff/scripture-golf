@@ -10,8 +10,7 @@
       "port": 9222,
       "sourceMaps": true,
       "cwd": "${workspaceRoot}",
-      "ionicLiveReload": true,
-      "devServerTimeout": 120000
+      "ionicLiveReload": false
     },
     {
       "name": "Run iOS on device",

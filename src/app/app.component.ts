@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {Http} from '@angular/http';
 import {Platform, Nav, AlertController} from 'ionic-angular';
-import {StatusBar, GoogleAnalytics, AppVersion} from 'ionic-native';
+import {Splashscreen, StatusBar, GoogleAnalytics, AppVersion} from 'ionic-native';
 import {HomePage} from '../pages/home/home';
 import {AboutPage} from '../pages/about/about';
 import {SettingsPage} from '../pages/settings/settings';
@@ -29,6 +29,9 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
+      StatusBar.backgroundColorByHexString('#36601C');
+      StatusBar.styleLightContent();
+      Splashscreen.hide();
       if(this.platform.is('cordova')) {
         GoogleAnalytics.startTrackerWithId('UA-46243905-10').then(() => {
           console.log('STARTED TRACKING VIA GOOGLE ANALYTICS');
@@ -37,8 +40,6 @@ export class MyApp {
             GoogleAnalytics.setAppVersion(version);
           });
         });
-        StatusBar.backgroundColorByHexString('#36601C');
-        StatusBar.styleLightContent();
       }
 
       this.setupDatabase();

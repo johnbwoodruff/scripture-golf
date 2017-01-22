@@ -17,6 +17,19 @@ export class Scriptures {
 
   public initializeScriptures(): Promise<boolean> {
     const promise = new Promise((resolve, reject) => {
+      // If settings don't exist, initialize them as they are needed for games.
+      this.storage.get('settings').then((data) => {
+        if(!data) {
+          let settings: Settings = {
+            bookOfMormon: true,
+            doctrineAndCovenants: true,
+            pearlOfGreatPrice: true,
+            oldTestament: true,
+            newTestament: true
+          };
+          this.storage.set('settings', JSON.stringify(settings));
+        }
+      });
       this.storage.query(`CREATE TABLE IF NOT EXISTS books(
         key TEXT NOT NULL,
         title TEXT NOT NULL
