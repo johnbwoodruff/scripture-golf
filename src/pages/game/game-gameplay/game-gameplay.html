@@ -1,4 +1,4 @@
-<ion-content no-bounce [ngClass]="{'tablet-gameplay': isTablet}">
+<ion-content no-bounce>
   <div padding>
     <ion-grid>
       <ion-row>
@@ -19,7 +19,7 @@
       </ion-row>
     </ion-grid>
 
-    <ion-card *ngIf="showVerse" [ngClass]="{'tablet-card': isTablet}">
+    <ion-card *ngIf="showVerse">
       <ion-card-content>
         {{currScripture.verse}}
       </ion-card-content>

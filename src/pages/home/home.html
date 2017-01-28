@@ -23,18 +23,18 @@
 
 <ion-content no-bounce padding class="home">
   <img class="align-center scripture-golf-logo" src="assets/img/golfer.svg"/>
-  <h1 text-center margin-bottom>Scripture Golf</h1>
-  <button ion-button icon-left block large (click)="openPage('game')">
+  <h1 class="app-title" text-center margin-bottom>Scripture Golf</h1>
+  <button class="primary-button" ion-button icon-left block large (click)="openPage('game')">
     <ion-icon name="ios-game-controller-b"></ion-icon>
     PLAY NOW
   </button>
   <!--TODO: Change [disabled]="true" to [disabled]="!isAuthenticated" when Stats Page is ready-->
   <div class="other-home-buttons" padding>
-    <button ion-button color="facebook" icon-left block margin-bottom (click)="authenticate()" *ngIf="currUser.id==='0'">
+    <button class="secondary-button" ion-button color="facebook" icon-left block margin-bottom (click)="authenticate()" *ngIf="currUser.id==='0'">
       <ion-icon name="logo-facebook"></ion-icon>
       CONNECT
     </button>
-    <button ion-button clear icon-left block margin-bottom (click)="openPage('about')">
+    <button class="secondary-button" ion-button clear icon-left block margin-bottom (click)="openPage('about')">
       <ion-icon name="information-circle"></ion-icon>
       ABOUT
     </button>

@@ -98,69 +98,6 @@ game-gameplay {
     height: 70px;
   }
 
-  .tablet-gameplay {
-    h3 {
-      font-size: 3em;
-    }
-    h6 {
-      font-size: 1.4em;
-    }
-    .points-box {
-      .points-header {
-        h4 {
-          font-size: 2em;
-        }
-      }
-      .points-footer {
-        h4 {
-          font-size: 2.5em;
-        }
-      }
-    }
-    .tablet-card {
-      padding: 20px;
-
-      ion-card-content {
-        font-size: 1.8em;
-      }
-    }
-    .chapter-input {
-      height: 65px;
-      font-size: 2.5em;
-
-      &::placeholder {
-        font-size: 1em;
-      }
-      &::-webkit-input-placeholder {
-        font-size: 1em;
-      }
-      &:-moz-placeholder {
-        font-size: 1em;
-      }
-      &::-moz-placeholder {
-        font-size: 1em;
-      }
-      &:-ms-input-placeholder {
-        font-size: 1em;
-      }
-    }
-    .chapter-header, .chapters-guessed {
-      font-size: 2em;
-    }
-    .guessed-section {
-      span {
-        font-size: 1.8em;
-      }
-      .comma {
-        font-size: 1.2em;
-      }
-    }
-    .check-answer-button {
-      font-size: 1.5em;
-    }
-  }
-
-
   @media(max-width: 400px) {
     .item-select {
       ion-label {

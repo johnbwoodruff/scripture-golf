@@ -17,7 +17,6 @@ import {SG_IMAGE_URL} from '../game/game-results/game-results';
 export class HomePage {
   isAuthenticated: boolean;
   currUser: any;
-  isTablet: boolean;
 
   constructor(public nav: NavController, public platform: Platform, public popoverCtrl: PopoverController, public auth: Auth, public user: User, public facebookAuth: FacebookAuth, public toastService: SgToast) {
     this.currUser = {
@@ -26,7 +25,6 @@ export class HomePage {
     };
 
     this.platform.ready().then(() => {
-      this.isTablet = this.platform.is('tablet');
       if(this.platform.is('cordova')) {
         this.isAuthenticated = this.auth.isAuthenticated();
         GoogleAnalytics.trackView('Home Page');

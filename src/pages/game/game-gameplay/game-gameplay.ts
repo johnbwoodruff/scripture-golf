@@ -32,7 +32,6 @@ export class GameGameplay {
   newTestament: string;
   selectOptions: AlertOptions;
   settings: Settings;
-  isTablet: boolean;
   loading: Loading;
 
   constructor(public scriptureService: Scriptures, public gameCtrl: Game, public toastService: SgToast, public alertCtrl: AlertController, public storage: Sql, public platform: Platform, public loadingCtrl: LoadingController) {
@@ -42,7 +41,6 @@ export class GameGameplay {
       duration: 1000
     });
     this.loading.present();
-    this.isTablet = this.platform.is('tablet');
     this.selectOptions = {
       enableBackdropDismiss: false
     };
