@@ -36,6 +36,20 @@ scroll-content {
   overflow-y: auto;
 }
 
+.display-flex {
+  display: flex;
+}
+
+.flex-fill {
+  flex: 1;
+  box-sizing: border-box;
+}
+
+.flex-none {
+  flex: 0 0 auto;
+  box-sizing: border-box;
+}
+
 .margin-none {
   margin: 0 !important;
 }

@@ -1,6 +1,22 @@
 <ion-content no-bounce>
   <div padding>
-    <ion-grid>
+    <div class="display-flex">
+      <div class="flex-fill name-section">
+        <h3>{{currPlayer.name}}</h3>
+        <h6>Round {{currRound}}</h6>
+      </div>
+      <div class="flex-none points-section">
+        <div class="points-box">
+          <div class="points-header">
+            <h4>Points</h4>
+          </div>
+          <div class="points-footer">
+            <h4>{{currPlayer.getScore()}}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--<ion-grid>
       <ion-row>
         <ion-col width-50>
           <h3>{{currPlayer.name}}</h3>
@@ -17,7 +33,7 @@
           </div>
         </ion-col>
       </ion-row>
-    </ion-grid>
+    </ion-grid>-->
 
     <ion-card *ngIf="showVerse">
       <ion-card-content>

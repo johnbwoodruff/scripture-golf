@@ -15,10 +15,6 @@ export class SgToast {
       position: 'top',
       closeButtonText: 'OK'
     };
-    // TODO: Determine the best place for this on ios
-    // if(this.platform.is('ios')) {
-    //   toastConfig.position = 'bottom';
-    // }
     if(!showCloseButton) {
       toastConfig.duration = 3000;
     }
