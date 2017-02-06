@@ -28,20 +28,16 @@ export class AboutPage {
           ios: '1186113597',
           android: 'market://details?id=com.ionicframework.scripturegolf455436'
         };
-        AppRate.preferences.customLocale = {
-          title: 'Leave a Review',
-          message: 'If you like the game, consider giving it 5 stars!',
-          cancelButtonLabel: 'Pass',
-          rateButtonLabel: 'Rate it!',
-          laterButtonLabel: 'Later'
-        };
       }
     });
   }
 
   reviewApp() {
-    // this.toastCtrl.showToast('This feature is disabled during beta');
-    // TODO: Uncomment this before full release
-    AppRate.promptForRating(true);
+    if(this.platform.is('ios')) {
+      window.open(`itms-apps://itunes.apple.com/app/viewContentsUserReviews/id1186113597`, '_system');
+    }
+    else {
+      AppRate.promptForRating(true);
+    }
   }
 }

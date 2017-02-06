@@ -211,13 +211,18 @@ export class GameGameplay {
   }
 
   endTurnAlert() {
-    let alert = this.alertCtrl.create({
-      title: 'Good Job!',
-      subTitle: 'Please pass the phone to the next player.',
-      buttons: ['OK'],
-      enableBackdropDismiss: false
-    });
-    alert.present();
+    if(this.numPlayers > 1) {
+      let alert = this.alertCtrl.create({
+        title: 'Good Job!',
+        subTitle: 'Please pass the phone to the next player.',
+        buttons: ['OK'],
+        enableBackdropDismiss: false
+      });
+      alert.present();
+    }
+    else {
+      this.toastService.showToast('Great job! You are correct!');
+    }
   }
 
   nextPlayer() {
