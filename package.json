@@ -33,17 +33,28 @@
     "typescript": "2.0.9"
   },
   "cordovaPlugins": [
-    "cordova-plugin-whitelist",
-    "cordova-plugin-console",
-    "cordova-plugin-statusbar",
     "cordova-plugin-device",
+    "cordova-plugin-whitelist",
     "cordova-plugin-splashscreen",
+    "cordova-plugin-statusbar",
     "ionic-plugin-keyboard",
+    "cordova-plugin-console",
     "cordova-plugin-x-socialsharing",
     "cordova-sqlite-storage",
     "cordova-plugin-app-version",
     "cordova-plugin-google-analytics",
-    "cordova-plugin-apprate"
+    "cordova-plugin-dialogs",
+    "cordova-plugin-globalization",
+    {
+      "id": "cordova-plugin-facebook4",
+      "locator": "cordova-plugin-facebook4",
+      "variables": {
+        "APP_ID": "1592863201017794",
+        "APP_NAME": "Scripture Golf"
+      }
+    },
+    "cordova-plugin-apprate",
+    "cordova-plugin-headercolor"
   ],
   "cordovaPlatforms": [
     "ios",
@@ -51,6 +62,11 @@
       "platform": "ios",
       "version": "",
       "locator": "ios"
+    },
+    {
+      "platform": "android",
+      "version": "",
+      "locator": "android"
     }
   ],
   "description": "scripture-golf: An Ionic project"
