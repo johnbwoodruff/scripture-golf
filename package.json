@@ -42,9 +42,6 @@
     "cordova-plugin-x-socialsharing",
     "cordova-sqlite-storage",
     "cordova-plugin-app-version",
-    "cordova-plugin-google-analytics",
-    "cordova-plugin-dialogs",
-    "cordova-plugin-globalization",
     {
       "id": "cordova-plugin-facebook4",
       "locator": "cordova-plugin-facebook4",
@@ -53,8 +50,11 @@
         "APP_NAME": "Scripture Golf"
       }
     },
+    "cordova-plugin-headercolor",
     "cordova-plugin-apprate",
-    "cordova-plugin-headercolor"
+    "cordova-plugin-dialogs",
+    "cordova-plugin-globalization",
+    "cordova-plugin-google-analytics"
   ],
   "cordovaPlatforms": [
     "ios",
@@ -67,6 +67,11 @@
       "platform": "android",
       "version": "",
       "locator": "android"
+    },
+    {
+      "platform": "windows",
+      "version": "",
+      "locator": "windows"
     }
   ],
   "description": "scripture-golf: An Ionic project"
