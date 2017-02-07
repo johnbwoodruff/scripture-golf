@@ -1,5 +1,7 @@
 // Place your settings in this file to overwrite default and user settings.
 {
   "html.suggest.angular1": false,
-  "html.suggest.ionic": true
+  "html.suggest.ionic": true,
+  "jshint.enable": false,
+  "eslint.enable": false
 }
