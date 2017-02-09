@@ -17,6 +17,7 @@ import {SG_IMAGE_URL} from '../game/game-results/game-results';
 export class HomePage {
   isAuthenticated: boolean;
   currUser: any;
+  isWindows: boolean;
 
   constructor(public nav: NavController, public platform: Platform, public popoverCtrl: PopoverController, public auth: Auth, public user: User, public facebookAuth: FacebookAuth, public toastService: SgToast) {
     this.currUser = {
@@ -25,16 +26,20 @@ export class HomePage {
     };
 
     this.platform.ready().then(() => {
+      this.isWindows = this.platform.is('windows');
       if(this.platform.is('cordova')) {
         this.isAuthenticated = this.auth.isAuthenticated();
-        GoogleAnalytics.trackView('Home Page');
+        // Google Analytics and user settings no applicable on Windows Phone
+        if(!this.isWindows) {
+          GoogleAnalytics.trackView('Home Page');
 
-        if(this.user.social.facebook && this.user.social.facebook.uid) {
-          this.currUser = {
-            id: this.user.social.facebook.uid,
-            name: this.user.social.facebook.data.full_name,
-            photo: this.user.social.facebook.data.profile_picture
-          };
+          if(this.user.social.facebook && this.user.social.facebook.uid) {
+            this.currUser = {
+              id: this.user.social.facebook.uid,
+              name: this.user.social.facebook.data.full_name,
+              photo: this.user.social.facebook.data.profile_picture
+            };
+          }
         }
       }
     });

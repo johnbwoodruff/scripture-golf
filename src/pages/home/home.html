@@ -6,7 +6,7 @@
 -->
 <ion-header>
   <ion-navbar color="primary">
-    <ion-buttons left *ngIf="currUser.id!=='0'">
+    <ion-buttons left *ngIf="!isWindows&&currUser.id!=='0'">
       <div (click)="openPopover($event)">
         <img *ngIf="!currUser.photo" class="profile-photo" src="assets/img/ghost.png" alt="Profile Photo">
         <img *ngIf="currUser.photo" class="profile-photo" src="{{currUser.photo}}" alt="Profile Photo">
@@ -30,7 +30,7 @@
   </button>
   <!--TODO: Change [disabled]="true" to [disabled]="!isAuthenticated" when Stats Page is ready-->
   <div class="other-home-buttons" padding>
-    <button class="secondary-button" ion-button color="facebook" icon-left block margin-bottom (click)="authenticate()" *ngIf="currUser.id==='0'">
+    <button class="secondary-button" ion-button color="facebook" icon-left block margin-bottom (click)="authenticate()" *ngIf="!isWindows&&currUser.id==='0'">
       <ion-icon name="logo-facebook"></ion-icon>
       CONNECT
     </button>

@@ -15,6 +15,7 @@ export class MyApp {
 
   rootPage: any = HomePage;
   pages: Array<{title: string, component: any}>;
+  isWindows: boolean;
 
   constructor(public platform: Platform, public toastService: SgToast, public alertCtrl: AlertController, public http: Http, public scriptures: Scriptures) {
     this.initializeApp();
@@ -29,11 +30,12 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
+      this.isWindows = this.platform.is('windows');
       HeaderColor.tint('#5AA02E');
       StatusBar.backgroundColorByHexString('#36601C');
       StatusBar.styleLightContent();
       Splashscreen.hide();
-      if(this.platform.is('cordova')) {
+      if(this.platform.is('cordova') && !this.isWindows) {
         GoogleAnalytics.startTrackerWithId('UA-46243905-10').then(() => {
           console.log('STARTED TRACKING VIA GOOGLE ANALYTICS');
           AppVersion.getVersionNumber().then((version) => {
