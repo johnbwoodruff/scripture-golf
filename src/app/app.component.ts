@@ -34,6 +34,7 @@ export class MyApp {
       HeaderColor.tint('#5AA02E');
       StatusBar.backgroundColorByHexString('#36601C');
       StatusBar.styleLightContent();
+      StatusBar.show();
       Splashscreen.hide();
       if(this.platform.is('cordova') && !this.isWindows) {
         GoogleAnalytics.startTrackerWithId('UA-46243905-10').then(() => {

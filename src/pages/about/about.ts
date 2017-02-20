@@ -26,7 +26,8 @@ export class AboutPage {
         });
         AppRate.preferences.storeAppURL = {
           ios: '1186113597',
-          android: 'market://details?id=com.ionicframework.scripturegolf455436'
+          android: 'market://details?id=com.scripture-golf.ldsscripturegolf',
+          windows: 'ms-windows-store://pdp/?ProductId=9wzdncrdnjbc'
         };
       }
     });
