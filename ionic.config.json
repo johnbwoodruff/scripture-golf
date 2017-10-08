@@ -1,5 +1,8 @@
 {
   "name": "scripture-golf",
-  "app_id": "0280dc86",
-  "type": "ionic-angular"
+  "app_id": "e99360cc",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
 }
