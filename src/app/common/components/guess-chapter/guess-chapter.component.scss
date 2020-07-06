@@ -1,0 +1,49 @@
+.input-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.chapter-input {
+  background-color: var(--ion-color-light);
+  padding: 10px 15px;
+  text-align: center;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  outline: none;
+
+  &:focus {
+    border: 1px solid var(--ion-color-primary);
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  &[type='number'] {
+    -moz-appearance: textfield;
+  }
+}
+
+.heading {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+
+  p {
+    margin: 0;
+    font-size: 14px;
+  }
+}
+
+.text-secondary {
+  color: var(--ion-color-medium);
+}
+
+.guessed-list {
+  font-size: 12px;
+}
