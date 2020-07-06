@@ -1,0 +1,12 @@
+<div>
+  <app-guess-book
+    *ngIf="game.guessState === 'BOOK'"
+    (correct)="onBookCorrect()"
+    (incorrect)="onBookIncorrect()"
+  ></app-guess-book>
+  <app-guess-chapter
+    *ngIf="game.guessState === 'CHAPTER'"
+    (correct)="onChapterCorrect()"
+    (incorrect)="onChapterIncorrect()"
+  ></app-guess-chapter>
+</div>

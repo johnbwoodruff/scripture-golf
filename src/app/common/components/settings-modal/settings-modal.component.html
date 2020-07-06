@@ -1,0 +1,101 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Game Options</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen class="ion-padding">
+  <div class="num-players" *ngIf="multi">
+    <p>Number of Players</p>
+    <div class="player-selection">
+      <div
+        class="toggle-button"
+        [class.active]="numPlayers === 2"
+        (click)="numPlayers = 2"
+      >
+        2 Players
+      </div>
+      <div
+        class="toggle-button"
+        [class.active]="numPlayers === 3"
+        (click)="numPlayers = 3"
+      >
+        3 Players
+      </div>
+      <div
+        class="toggle-button"
+        [class.active]="numPlayers === 4"
+        (click)="numPlayers = 4"
+      >
+        4 Players
+      </div>
+    </div>
+  </div>
+  <div class="books">
+    <p>Books of Scripture</p>
+    <div class="books-of-scripture">
+      <div class="row">
+        <div
+          class="toggle-button"
+          [class.active]="selectedBooks.BOM"
+          (click)="toggleBook('BOM')"
+        >
+          Book of<br />Mormon
+        </div>
+      </div>
+      <div class="row">
+        <div
+          class="toggle-button"
+          [class.active]="selectedBooks.DC"
+          (click)="toggleBook('DC')"
+        >
+          Doctrine &<br />Covenants
+        </div>
+        <div
+          class="toggle-button"
+          [class.active]="selectedBooks.PGP"
+          (click)="toggleBook('PGP')"
+        >
+          Pearl of<br />Great Price
+        </div>
+      </div>
+      <div class="row">
+        <div
+          class="toggle-button"
+          [class.active]="selectedBooks.OT"
+          (click)="toggleBook('OT')"
+        >
+          Old<br />Testament
+        </div>
+        <div
+          class="toggle-button"
+          [class.active]="selectedBooks.NT"
+          (click)="toggleBook('NT')"
+        >
+          New<br />Testament
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="num-rounds">
+    <p>Number of Rounds</p>
+    <ion-range
+      min="1"
+      max="9"
+      step="1"
+      snaps="true"
+      pin="true"
+      [(ngModel)]="rounds"
+    ></ion-range>
+  </div>
+  <ion-button
+    expand="block"
+    color="primary"
+    (click)="start()"
+    [disabled]="shouldBeDisabled()"
+  >
+    Start Game
+  </ion-button>
+</ion-content>

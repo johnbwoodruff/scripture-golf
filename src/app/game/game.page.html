@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Play</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="quit()">Quit</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="game" *ngIf="game.pageState !== 'RESULTS'">
+    <div class="header">
+      <div class="player-info">
+        <h6>Player {{game.activePlayer}}</h6>
+        <p>Round {{game.currentRound}}</p>
+      </div>
+      <div class="score">
+        <div class="score-card">
+          <div class="card-header">Points</div>
+          <div class="card-content">{{game.currentPlayer.score}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <app-scripture
+        [scripture]="game.currentScripture"
+        *ngIf="game.pageState === 'VERSE'"
+      ></app-scripture>
+      <app-guess
+        *ngIf="game.pageState === 'GUESS'"
+        (correct)="correct()"
+        (incorrect)="incorrect()"
+      ></app-guess>
+    </div>
+  </div>
+  <div class="results" *ngIf="game.pageState === 'RESULTS'">
+    <app-results (playAgain)="playAgain()"></app-results>
+  </div>
+</ion-content>
+
+<ion-footer *ngIf="game.pageState !== 'RESULTS'">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleState()">
+        <span *ngIf="game.pageState === 'VERSE'">Guess</span>
+        <span *ngIf="game.pageState === 'GUESS'">Verse</span>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

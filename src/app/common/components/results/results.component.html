@@ -1,0 +1,30 @@
+<div>
+  <h3>{{ winningPlayer.name }} Wins!</h3>
+  <div class="score-card">
+    <div class="header">
+      <p>Score Card</p>
+      <p class="text-secondary">
+        {{ game.settings.rounds }} Round<span *ngIf="game.settings.rounds > 1"
+          >s</span
+        >
+      </p>
+    </div>
+    <div class="content">
+      <div class="player-row" *ngFor="let player of players; let i = index">
+        <div class="icon">
+          <ion-icon *ngIf="i === 0" name="trophy"></ion-icon>
+          <ion-icon *ngIf="i !== 0" name="person"></ion-icon>
+        </div>
+        <p class="player-name">{{ player.name }}</p>
+        <p class="text-secondary">
+          {{ player.getScore() }} point<span *ngIf="player.getScore() !== 1"
+            >s</span
+          >
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="action-button">
+    <ion-button (click)="again()">Play Again</ion-button>
+  </div>
+</div>

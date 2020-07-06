@@ -1,0 +1,43 @@
+.header {
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  align-content: center;
+}
+
+.player-info {
+  h6 {
+    margin-top: 0;
+  }
+  p {
+    margin: 0;
+    font-size: 12px;
+    color: var(--ion-color-medium);
+  }
+}
+
+.score {
+  display: grid;
+  justify-content: end;
+
+  .score-card {
+    min-width: 60px;
+    height: 100%;
+    border: 1px solid var(--ion-color-medium);
+
+    .card-header {
+      text-align: center;
+      padding: 1px 10px;
+      font-size: 12px;
+      border-bottom: 1px solid var(--ion-color-medium);
+    }
+    .card-content {
+      text-align: center;
+      padding: 1px 10px;
+      font-size: 18px;
+    }
+  }
+}
+
+.content {
+  padding: 20px 0;
+}

@@ -1,8 +1,7 @@
 {
-  "name": "scripture-golf",
-  "app_id": "e99360cc",
-  "type": "ionic-angular",
+  "name": "Scripture Golf",
   "integrations": {
-    "cordova": {}
-  }
+    "capacitor": {}
+  },
+  "type": "angular"
 }
