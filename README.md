@@ -1,38 +1,27 @@
-# Scripture Golf
+# ScriptureGolf
 
-This is LDS Scripture Golf, a classic Sunday School scripture trivia game. It is written with [Ionic](https://ionic.io) and [Capacitor](https://capacitorjs.com).
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.2.
 
-## Developing
+## Development server
 
-You need both the Ionic CLI and Angular CLI installed.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-```shell
-$ npm install -g @ionic/cli @angular/cli
-```
+## Code scaffolding
 
-Once you've cloned the project, run `npm install` to install project dependencies. Do not use yarn as this project is built with npm in mind and may not work as expected with yarn.
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-To serve the application locally in a browser, simply run `ionic serve` or `ionic serve --lab` to run it in the Ionic Lab.
+## Build
 
-To get your changes to run in a native environment (iOS or Android device/emulator) simply run the following commands upon making your desired changes:
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-```shell
-$ ionic build
-$ npx cap sync # or `npx cap copy` if you haven't made plugin changes
-# Open the desired project
-$ npx cap open ios
-$ npx cap open android
-```
+## Running unit tests
 
-You can then run your app on a device or emulator using Xcode or Android Studio.
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Production Build
+## Running end-to-end tests
 
-To deploy to the various app stores, run the following commands to build your app:
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-```shell
-$ ionic build --prod
-$ npx cap sync
-```
+## Further help
 
-Then open your project in Xcode or Android Studio and generate your signed build from there as with a normal iOS or Android app.
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

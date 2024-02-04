@@ -1,0 +1,22 @@
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ScriptureGolfStore } from '../store/app.store';
+
+@Component({
+  selector: 'sg-theme-picker',
+  standalone: true,
+  imports: [],
+  templateUrl: './theme-picker.component.html',
+  styleUrl: './theme-picker.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class ThemePickerComponent {
+  store = inject(ScriptureGolfStore);
+
+  public themeChange(event: any): void {
+    if (event.target?.checked) {
+      this.store.updateTheme('light');
+    } else {
+      this.store.updateTheme('dark');
+    }
+  }
+}
