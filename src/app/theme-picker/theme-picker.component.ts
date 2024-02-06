@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { ScriptureGolfStore } from '../store/app.store';
+import { ScriptureGolfStore } from '../stores/app-store/app.store';
 
 @Component({
   selector: 'sg-theme-picker',

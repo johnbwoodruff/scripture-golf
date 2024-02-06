@@ -5,7 +5,7 @@ import {
   inject
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ScriptureGolfStore } from './store/app.store';
+import { ScriptureGolfStore } from './stores/app-store/app.store';
 
 @Component({
   selector: 'sg-root',
