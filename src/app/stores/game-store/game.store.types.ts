@@ -1,3 +1,4 @@
+import { Scripture, ScriptureBook } from '../../data/data.types';
 import { Player } from './player';
 
 export interface SelectedBooks {
@@ -17,4 +18,8 @@ export interface GameSettings {
 export interface GameState {
   settings: GameSettings;
   players: Player[];
+  currentPlayer: number;
+  currentRound: number;
+  books: ScriptureBook[];
+  scriptures: Scripture[];
 }

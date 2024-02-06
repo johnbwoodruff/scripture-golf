@@ -1,11 +1,13 @@
+export type VolumeKey = 'BOM' | 'DC' | 'PGP' | 'OT' | 'NT';
+
 export interface Scripture {
-  volume: string;
+  volume: VolumeKey;
   book: string;
   chapter: number;
   verse: string;
 }
 
 export interface ScriptureBook {
-  key: string;
+  key: VolumeKey;
   title: string;
 }

@@ -14,6 +14,11 @@ export const routes: Routes = [
       )
   },
   {
+    path: 'game',
+    loadComponent: () =>
+      import('./game/game.component').then((mod) => mod.GameComponent)
+  },
+  {
     path: 'about',
     loadComponent: () =>
       import('./about/about.component').then((mod) => mod.AboutComponent)

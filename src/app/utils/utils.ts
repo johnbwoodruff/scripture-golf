@@ -1,4 +1,4 @@
-import { Scripture } from '../interfaces/scripture';
+import { Scripture } from '../data/data.types';
 
 /**
  * Shuffle an array of Scripture objects.

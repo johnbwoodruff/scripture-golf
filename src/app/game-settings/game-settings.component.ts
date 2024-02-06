@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { startWith } from 'rxjs';
 import { booksValidator } from './books.validator';
 
@@ -20,12 +20,13 @@ import { booksValidator } from './books.validator';
 })
 export class GameSettingsComponent {
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
   multiplayer = this.route.snapshot.queryParamMap.get('multiplayer') === 'true';
 
   settingsForm = new FormGroup({
     numPlayers: new FormControl(this.multiplayer ? 2 : 1, Validators.required),
-    books: new FormGroup(
+    selectedBooks: new FormGroup(
       {
         BOM: new FormControl(true),
         DC: new FormControl(false),
@@ -41,4 +42,8 @@ export class GameSettingsComponent {
   numRoundsValue$ = this.settingsForm
     .get('numRounds')!
     .valueChanges.pipe(startWith(this.settingsForm.get('numRounds')!.value));
+
+  public startGame(): void {
+    this.router.navigate(['/game'], { state: this.settingsForm.value });
+  }
 }
