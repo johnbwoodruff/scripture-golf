@@ -1,5 +1,10 @@
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { GameState, GameSettings } from './game.store.types';
+import {
+  generateBooks,
+  generatePlayers,
+  generateScriptures
+} from '../../utils/utils';
 
 const initialState: GameState = {
   settings: {
@@ -24,7 +29,21 @@ export const GameStore = signalStore(
   { providedIn: 'root' },
   withState(initialState),
   withMethods((store) => ({
-    startGame(): void {},
+    startGame(): void {
+      const settings = store.settings();
+      const players = generatePlayers(settings.numPlayers);
+      const books = generateBooks(settings.selectedBooks);
+      const scriptures = generateScriptures(settings.selectedBooks);
+
+      const newState = {
+        currentRound: 1,
+        currentPlayer: 1,
+        players,
+        books,
+        scriptures
+      };
+      patchState(store, newState);
+    },
     updateSettings(settings: GameSettings): void {
       patchState(store, { settings });
     }

@@ -1,4 +1,6 @@
-export const BOOKS = [
+import { ScriptureBook } from './data.types';
+
+export const BOOKS: ScriptureBook[] = [
   {
     key: 'BOM',
     title: '1 Nephi'

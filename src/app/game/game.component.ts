@@ -21,6 +21,7 @@ export class GameComponent {
       .state as GameSettings;
     if (!isNil(gameSettings)) {
       this.store.updateSettings(gameSettings);
+      this.store.startGame();
     }
   }
 }
