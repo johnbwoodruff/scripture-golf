@@ -15,6 +15,8 @@ export interface GameSettings {
   selectedBooks: SelectedBooks;
 }
 
+export type RoundState = 'verse' | 'guess';
+
 export interface GameState {
   settings: GameSettings;
   players: Player[];
@@ -22,4 +24,5 @@ export interface GameState {
   currentRound: number;
   books: ScriptureBook[];
   scriptures: Scripture[];
+  roundState: RoundState;
 }

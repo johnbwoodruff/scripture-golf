@@ -45,12 +45,19 @@ export const generateBooks = (
 
 /**
  * Generates a list of scriptures based on the selected books.
+ * It selects random scriptures from each selected volume so
+ * there is a good mix of scriptures.
  */
 export const generateScriptures = (
-  selectedBooks: SelectedBooks
+  selectedBooks: SelectedBooks,
+  numRounds: number
 ): Scripture[] => {
   const volumes = getVolumes(selectedBooks);
-  const scriptures = SCRIPTURES.filter((s) => volumes.includes(s.volume));
+  const scriptures: Scripture[] = [];
+  volumes.forEach((volume) => {
+    const volumeScriptures = shuffle(SCRIPTURES[volume]).slice(0, numRounds);
+    scriptures.push(...volumeScriptures);
+  });
   return shuffle(scriptures);
 };
 

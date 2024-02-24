@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { isNil } from 'lodash-es';
 import { GameStore } from '../stores/game-store/game.store';
 import { GameSettings } from '../stores/game-store/game.store.types';
@@ -7,7 +7,7 @@ import { GameSettings } from '../stores/game-store/game.store.types';
 @Component({
   selector: 'sg-game',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -23,5 +23,9 @@ export class GameComponent {
       this.store.updateSettings(gameSettings);
       this.store.startGame();
     }
+  }
+
+  toggleRoundState(): void {
+    this.store.toggleRoundState();
   }
 }

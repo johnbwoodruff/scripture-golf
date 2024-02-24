@@ -22,7 +22,8 @@ const initialState: GameState = {
   currentPlayer: 1,
   currentRound: 1,
   books: [],
-  scriptures: []
+  scriptures: [],
+  roundState: 'verse'
 };
 
 export const GameStore = signalStore(
@@ -33,7 +34,10 @@ export const GameStore = signalStore(
       const settings = store.settings();
       const players = generatePlayers(settings.numPlayers);
       const books = generateBooks(settings.selectedBooks);
-      const scriptures = generateScriptures(settings.selectedBooks);
+      const scriptures = generateScriptures(
+        settings.selectedBooks,
+        settings.numRounds
+      );
 
       const newState = {
         currentRound: 1,
@@ -46,6 +50,11 @@ export const GameStore = signalStore(
     },
     updateSettings(settings: GameSettings): void {
       patchState(store, { settings });
+    },
+    toggleRoundState(): void {
+      const roundState = store.roundState();
+      const newRoundState = roundState === 'verse' ? 'guess' : 'verse';
+      patchState(store, { roundState: newRoundState });
     }
   }))
 );

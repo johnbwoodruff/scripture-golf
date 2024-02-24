@@ -1,6 +1,6 @@
 import { Scripture } from './data.types';
 
-export const SCRIPTURES: Scripture[] = [
+export const BOM_SCRIPTURES: Scripture[] = [
   {
     volume: 'BOM',
     book: '1 Nephi',
@@ -1619,7 +1619,10 @@ export const SCRIPTURES: Scripture[] = [
     chapter: 10,
     verse:
       'And now I bid unto all, farewell. I soon go to rest in the paradise of God, until my spirit and body shall again reunite, and I am brought forth triumphant through the air, to meet you before the pleasing bar of the great Jehovah, the Eternal Judge of both quick and dead. Amen.'
-  },
+  }
+] as const;
+
+export const DC_SCRIPTURES: Scripture[] = [
   {
     volume: 'DC',
     book: 'Sections 1-19',
@@ -1785,7 +1788,10 @@ export const SCRIPTURES: Scripture[] = [
     chapter: 137,
     verse:
       'Thus came the voice of the Lord unto me, saying: All who have died without a knowledge of this gospel, who would have received it if they had been permitted to tarry, shall be heirs of the celestial kingdom of God; Also all that shall die henceforth without a knowledge of it, who would have received it with all their hearts, shall be heirs of that kingdom; For I, the Lord, will judge all men according to their works, according to the desire of their hearts. And I also beheld that all children who die before they arrive at the years of accountability are saved in the celestial kingdom of heaven.'
-  },
+  }
+] as const;
+
+export const NT_SCRIPTURES: Scripture[] = [
   {
     volume: 'NT',
     book: '1 Corinthians',
@@ -1959,7 +1965,10 @@ export const SCRIPTURES: Scripture[] = [
     chapter: 7,
     verse:
       'But he, being full of the Holy Ghost, looked up stedfastly into heaven, and saw the glory of God, and Jesus standing on the right hand of God, And said, Behold, I see the heavens opened, and the Son of man standing on the right hand of God.'
-  },
+  }
+] as const;
+
+export const OT_SCRIPTURES: Scripture[] = [
   {
     volume: 'OT',
     book: 'Genesis',
@@ -2113,7 +2122,10 @@ export const SCRIPTURES: Scripture[] = [
     chapter: 4,
     verse:
       'Behold, I will send you Elijah the prophet before the coming of the great and dreadful day of the LORD: And he shall turn the heart of the fathers to the children, and the heart of the children to their fathers, lest I come and smite the earth with a curse.'
-  },
+  }
+] as const;
+
+export const PGP_SCRIPTURES: Scripture[] = [
   {
     volume: 'PGP',
     book: 'Moses',
@@ -2290,3 +2302,11 @@ export const SCRIPTURES: Scripture[] = [
       'We believe in being honest, true, chaste, benevolent, virtuous, and in doing good to all men; indeed, we may say that we follow the admonition of Paul—We believe all things, we hope all things, we have endured many things, and hope to be able to endure all things. If there is anything virtuous, lovely, or of good report or praiseworthy, we seek after these things.'
   }
 ] as const;
+
+export const SCRIPTURES: Record<string, Scripture[]> = {
+  BOM: BOM_SCRIPTURES,
+  DC: DC_SCRIPTURES,
+  NT: NT_SCRIPTURES,
+  OT: OT_SCRIPTURES,
+  PGP: PGP_SCRIPTURES
+};
