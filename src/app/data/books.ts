@@ -1,4 +1,16 @@
-import { ScriptureBook } from './data.types';
+import { ScriptureBook, VolumeKey } from './data.types';
+
+type VolumeNames = {
+  [key in VolumeKey]: string;
+};
+
+export const VOLUME_NAMES: VolumeNames = {
+  BOM: 'Book of Mormon',
+  DC: 'Doctrine & Covenants',
+  PGP: 'Pearl of Great Price',
+  OT: 'Old Testament',
+  NT: 'New Testament'
+};
 
 export const BOOKS: ScriptureBook[] = [
   {

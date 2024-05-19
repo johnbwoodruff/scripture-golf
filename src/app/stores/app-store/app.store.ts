@@ -3,7 +3,7 @@ import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { ScriptureGolfState, AppTheme } from './app.store.types';
 
 const initialState: ScriptureGolfState = {
-  theme: 'dark'
+  theme: 'sgdark'
 };
 
 export const ScriptureGolfStore = signalStore(

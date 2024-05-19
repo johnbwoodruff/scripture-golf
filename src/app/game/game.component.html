@@ -1,7 +1,9 @@
 <main class="h-screen overflow-hidden flex flex-col">
-  <div class="navbar bg-base-100 drop-shadow flex-none">
+  <div class="navbar bg-base-200 drop-shadow flex-none">
     <div class="flex-1 flex-row items-center">
-      <a class="btn btn-ghost text-xl">Player 1</a>
+      <a class="btn btn-ghost text-xl">
+        Round {{ store.currentRound() }} - Player {{ store.currentPlayerNum() }}
+      </a>
     </div>
     <div class="flex-none">
       <ul class="menu menu-horizontal px-1">
@@ -11,41 +13,65 @@
   </div>
 
   <div class="flex flex-col items-start p-4 flex-auto overflow-auto">
-    <!-- <div class="stats shadow flex-none">
-    </div> -->
-    <!-- <div class="stat">
-      <div class="stat-title">Points</div>
-      <div class="stat-value text-primary">26</div>
-    </div> -->
-
     @if (store.roundState() === 'verse') {
       <p class="prose overflow-auto flex-auto">
-        Thou shalt have no other gods before me. Thou shalt not make unto thee
-        any graven image, or any likeness of any thing that is in heaven above,
-        or that is in the earth beneath, or that is in the water under the
-        earth: Thou shalt not take the name of the LORD thy God in vain; for the
-        LORD will not hold him guiltless that taketh his name in vain. Remember
-        the sabbath day, to keep it holy. Honour thy father and thy mother: that
-        thy days may be long upon the land which the LORD thy God giveth thee.
-        Thou shalt not kill. Thou shalt not commit adultery. Thou shalt not
-        steal. Thou shalt not bear false witness against thy neighbour. Thou
-        shalt not covet. Thou shalt have no other gods before me. Thou shalt not
-        make unto thee any graven image, or any likeness of any thing that is in
-        heaven above, or that is in the earth beneath, or that is in the water
-        under the earth: Thou shalt not take the name of the LORD thy God in
-        vain; for the LORD will not hold him guiltless that taketh his name in
-        vain. Remember the sabbath day, to keep it holy. Honour thy father and
-        thy mother: that thy days may be long upon the land which the LORD thy
-        God giveth thee. Thou shalt not kill. Thou shalt not commit adultery.
-        Thou shalt not steal. Thou shalt not bear false witness against thy
-        neighbour. Thou shalt not covet.
+        {{ store.currentScripture().verse }}
       </p>
     } @else {
-      GUESS STATE
+      <div
+        class="flex flex-col gap-4 items-center justify-start flex-auto w-full"
+      >
+        <h4>Guess the {{ guessLabel() }}</h4>
+        @if (store.guessState() === 'book') {
+          <select
+            class="select select-bordered w-full max-w-xs"
+            [ngModel]="bookGuess()"
+            (ngModelChange)="bookGuess.set($event)"
+          >
+            @for (group of store.booksSelectList(); track group.volume) {
+              <option disabled>{{ group.volume }}</option>
+              @for (book of group.books; track $index) {
+                <option [value]="book.title">{{ book.title }}</option>
+              }
+            }
+          </select>
+        } @else {
+          <input
+            type="number"
+            placeholder="Chapter Number"
+            class="input input-bordered w-full max-w-xs"
+            [ngModel]="chapterGuess()"
+            (ngModelChange)="chapterGuess.set($event)"
+          />
+        }
+        <button class="btn btn-primary btn-wide" (click)="guess()">
+          Guess
+        </button>
+
+        <div
+          class="grid gap-x-6 gap-y-4 mt-6 w-full"
+          [class.grid-cols-2]="store.guessState() === 'book'"
+          [class.grid-cols-4]="store.guessState() === 'chapter'"
+        >
+          @for (guess of store.incorrectGuesses(); track $index) {
+            <div
+              class="flex flex-row align-center justify-center gap-1 text-error"
+            >
+              <lucide-icon [img]="icons.X"></lucide-icon>
+              <p>{{ guess }}</p>
+            </div>
+          }
+        </div>
+      </div>
     }
   </div>
 
-  <div class="navbar bg-base-100 drop-shadow justify-end flex-none">
+  <div class="navbar bg-base-200 drop-shadow justify-end flex-none">
+    <div class="flex-1 flex-row items-center">
+      <a class="btn btn-ghost text-xl">
+        Points: {{ store.currentPlayerScore() }}
+      </a>
+    </div>
     <div class="flex-none">
       <ul class="menu menu-horizontal px-1">
         <li>

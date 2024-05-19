@@ -14,9 +14,9 @@ export class ThemePickerComponent {
 
   public themeChange(event: any): void {
     if (event.target?.checked) {
-      this.store.updateTheme('light');
+      this.store.updateTheme('sglight');
     } else {
-      this.store.updateTheme('dark');
+      this.store.updateTheme('sgdark');
     }
   }
 }

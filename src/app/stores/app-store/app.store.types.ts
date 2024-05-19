@@ -1,4 +1,4 @@
-export type AppTheme = 'light' | 'dark';
+export type AppTheme = 'sglight' | 'sgdark';
 
 export interface ScriptureGolfState {
   theme: AppTheme;

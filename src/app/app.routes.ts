@@ -19,6 +19,13 @@ export const routes: Routes = [
       import('./game/game.component').then((mod) => mod.GameComponent)
   },
   {
+    path: 'scorecard',
+    loadComponent: () =>
+      import('./scorecard/scorecard.component').then(
+        (mod) => mod.ScorecardComponent
+      )
+  },
+  {
     path: 'about',
     loadComponent: () =>
       import('./about/about.component').then((mod) => mod.AboutComponent)

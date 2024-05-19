@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ScriptureGolfStore } from './stores/app-store/app.store';
+import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'sg-root',
@@ -21,13 +22,13 @@ export class AppComponent {
   constructor() {
     effect(() => {
       switch (this.store.theme()) {
-        case 'light':
-          document.documentElement.classList.remove('dark');
-          document.documentElement.setAttribute('data-theme', 'light');
+        case 'sglight':
+          document.documentElement.classList.remove('sgdark');
+          document.documentElement.setAttribute('data-theme', 'sglight');
           break;
-        case 'dark':
-          document.documentElement.classList.add('dark');
-          document.documentElement.setAttribute('data-theme', 'dark');
+        case 'sgdark':
+          document.documentElement.classList.add('sgdark');
+          document.documentElement.setAttribute('data-theme', 'sgdark');
           break;
       }
     });

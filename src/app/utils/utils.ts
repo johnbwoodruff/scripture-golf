@@ -1,7 +1,11 @@
-import { BOOKS } from '../data/books';
-import { Scripture, ScriptureBook } from '../data/data.types';
+import { isNil } from 'lodash-es';
+import { BOOKS, VOLUME_NAMES } from '../data/books';
+import { Scripture, ScriptureBook, VolumeKey } from '../data/data.types';
 import { SCRIPTURES } from '../data/scriptures';
-import { SelectedBooks } from '../stores/game-store/game.store.types';
+import {
+  GroupedBook,
+  SelectedBooks
+} from '../stores/game-store/game.store.types';
 import { Player } from '../stores/game-store/player';
 
 /**
@@ -23,6 +27,9 @@ export const shuffle = (array: Scripture[]): Scripture[] => {
   return arr;
 };
 
+export const volumeKeyToName = (volumeKey: VolumeKey): string =>
+  VOLUME_NAMES[volumeKey];
+
 /**
  * Get the selected volumes array from the selected books.
  */
@@ -41,6 +48,34 @@ export const generateBooks = (
 ): ScriptureBook[] => {
   const volumes = getVolumes(selectedBooks);
   return BOOKS.filter((b) => volumes.includes(b.key));
+};
+
+/**
+ * Given a list of books, groups them by volume.
+ */
+export const groupBooksByVolume = (books: ScriptureBook[]): GroupedBook[] => {
+  const grouped: GroupedBook[] = books.reduce(
+    (acc: GroupedBook[], book: ScriptureBook) => {
+      // Find the volume group in the accumulator
+      let volumeGroup: GroupedBook | undefined = acc.find(
+        (group: GroupedBook) => group.volume === volumeKeyToName(book.key)
+      );
+
+      // If the volume group does not exist, create it
+      if (isNil(volumeGroup)) {
+        volumeGroup = { volume: volumeKeyToName(book.key), books: [] };
+        acc.push(volumeGroup);
+      }
+
+      // Add the current book to the volume group's books array
+      volumeGroup.books.push(book);
+
+      return acc;
+    },
+    []
+  );
+
+  return grouped;
 };
 
 /**

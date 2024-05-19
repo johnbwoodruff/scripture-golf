@@ -9,6 +9,11 @@ export interface SelectedBooks {
   NT: boolean;
 }
 
+export interface GroupedBook {
+  volume: string;
+  books: ScriptureBook[];
+}
+
 export interface GameSettings {
   numPlayers: number;
   numRounds: number;
@@ -17,12 +22,16 @@ export interface GameSettings {
 
 export type RoundState = 'verse' | 'guess';
 
+export type GuessState = 'book' | 'chapter';
+
 export interface GameState {
   settings: GameSettings;
   players: Player[];
-  currentPlayer: number;
+  currentPlayerNum: number;
   currentRound: number;
   books: ScriptureBook[];
   scriptures: Scripture[];
   roundState: RoundState;
+  guessState: GuessState;
+  incorrectGuesses: (string | number)[];
 }
