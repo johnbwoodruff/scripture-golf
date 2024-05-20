@@ -11,15 +11,15 @@
     class="flex flex-col items-start p-4 flex-auto overflow-auto prose prose-sm"
   >
     <h2 class="mb-1">Scripture Golf</h2>
-    <p class="mb-2">{{ version }}</p>
+    @if (version !== null) {
+      <p class="mb-2">{{ version() }}</p>
+    }
     <p class="italic my-2">Copyright &copy; {{ year }} - John Woodruff</p>
     <p class="my-2">
       Scripture Golf is a traditional LDS Sunday School trivia game, designed to
       test your knowledge of scripture in a fun and interactive way.
     </p>
-    <p class="my-2">
-      <strong>Feedback and Support</strong>
-    </p>
+    <h3 class="my-2">Feedback and Support</h3>
     <p class="my-2">
       While every effort has been made to make this app bug-free, if you
       encounter any bugs or have any suggestions for future versions, please
@@ -29,11 +29,13 @@
       supported through adding more scriptures, making changes to the app to
       improve performance, and adding new features.
     </p>
-    <button class="btn btn-primary btn-wide my-4">
-      <lucide-icon [img]="icons.Star"></lucide-icon>
-      Write a Review
-    </button>
-    <h3 class="my-2">Other Links</h3>
+    @if (showRatingButton()) {
+      <button class="btn btn-primary btn-wide my-4">
+        <lucide-icon [img]="icons.Star"></lucide-icon>
+        Write a Review
+      </button>
+    }
+    <h3 class="my-2">Resources</h3>
     <a class="my-1" href="https://scripturegolf.com/" target="_blank">
       Website
     </a>
