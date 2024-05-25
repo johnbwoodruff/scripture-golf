@@ -5,8 +5,10 @@ import {
   inject
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { Preferences } from '@capacitor/preferences';
+
 import { ScriptureGolfStore } from './stores/app-store/app.store';
-import { LucideAngularModule } from 'lucide-angular';
+import { AppTheme } from './stores/app-store/app.store.types';
 
 @Component({
   selector: 'sg-root',
@@ -32,5 +34,13 @@ export class AppComponent {
           break;
       }
     });
+
+    this.getPersistedTheme();
+  }
+
+  private async getPersistedTheme() {
+    const ret = await Preferences.get({ key: 'theme' });
+    const theme = ret?.value ?? 'sgdark';
+    this.store.updateTheme(theme as AppTheme);
   }
 }

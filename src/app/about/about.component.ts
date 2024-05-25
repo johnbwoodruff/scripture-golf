@@ -23,7 +23,9 @@ export class AboutComponent {
   constructor() {
     this.getVersion();
     const platform = Capacitor.getPlatform();
-    this.showRatingButton.set(platform === 'ios' || platform === 'android');
+    // TODO: Add this back in later
+    // this.showRatingButton.set(platform === 'ios' || platform === 'android');
+    this.showRatingButton.set(false);
   }
 
   async getVersion(): Promise<void> {

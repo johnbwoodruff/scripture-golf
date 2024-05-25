@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Preferences } from '@capacitor/preferences';
+
 import { ScriptureGolfStore } from '../stores/app-store/app.store';
 
 @Component({
@@ -15,8 +17,17 @@ export class ThemePickerComponent {
   public themeChange(event: any): void {
     if (event.target?.checked) {
       this.store.updateTheme('sglight');
+      this.updatePreferences('sglight');
     } else {
       this.store.updateTheme('sgdark');
+      this.updatePreferences('sgdark');
     }
+  }
+
+  private async updatePreferences(theme: string) {
+    await Preferences.set({
+      key: 'theme',
+      value: theme
+    });
   }
 }

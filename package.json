@@ -24,6 +24,7 @@
     "@capacitor/app": "^6.0.0",
     "@capacitor/core": "^6.0.0",
     "@capacitor/ios": "^6.0.0",
+    "@capacitor/preferences": "^6.0.0",
     "@ngrx/signals": "^17.1.0",
     "lodash-es": "^4.17.21",
     "lucide-angular": "^0.378.0",
