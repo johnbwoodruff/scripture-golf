@@ -83,7 +83,8 @@ export const GameStore = signalStore(
         currentPlayerNum: 1,
         players,
         books,
-        scriptures
+        scriptures,
+        incorrectGuesses: []
       };
       patchState(store, newState);
     },

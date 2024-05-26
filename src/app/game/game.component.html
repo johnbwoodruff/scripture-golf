@@ -35,6 +35,9 @@
               }
             }
           </select>
+          <button class="btn btn-primary btn-wide" (click)="guessBook()">
+            Guess
+          </button>
         } @else {
           <input
             type="number"
@@ -43,10 +46,10 @@
             [ngModel]="chapterGuess()"
             (ngModelChange)="chapterGuess.set($event)"
           />
+          <button class="btn btn-primary btn-wide" (click)="guessChapter()">
+            Guess
+          </button>
         }
-        <button class="btn btn-primary btn-wide" (click)="guess()">
-          Guess
-        </button>
 
         <div
           class="grid gap-x-6 gap-y-4 mt-6 w-full"

@@ -32,6 +32,16 @@ export class GameComponent {
   bookGuess = signal<string | null>(null);
   chapterGuess = signal<number | null>(null);
 
+  bookGuessDiabled = computed(() => {
+    const guess = this.bookGuess();
+    return isNil(guess);
+  });
+
+  chapterGuessDiabled = computed(() => {
+    const guess = this.chapterGuess();
+    return isNil(guess) || guess < 1;
+  });
+
   constructor() {
     const gameSettings = this.router.getCurrentNavigation()?.extras
       .state as GameSettings;
@@ -45,19 +55,12 @@ export class GameComponent {
     this.store.toggleRoundState();
   }
 
-  guess(): void {
-    if (this.store.guessState() === 'book') {
-      this.guessBook();
-    } else {
-      this.guessChapter();
-    }
-  }
-
-  private guessBook(): void {
-    const guess = this.bookGuess();
-    if (isNil(guess)) {
+  public guessBook(): void {
+    if (this.bookGuessDiabled()) {
       return;
     }
+
+    const guess = this.bookGuess()!;
 
     if (guess === this.store.currentScripture().book) {
       this.store.successfulGuess();
@@ -68,11 +71,12 @@ export class GameComponent {
     this.bookGuess.set(null);
   }
 
-  private guessChapter(): void {
-    const guess = this.chapterGuess();
-    if (isNil(guess)) {
+  public guessChapter(): void {
+    if (this.chapterGuessDiabled()) {
       return;
     }
+
+    const guess = this.chapterGuess()!;
 
     if (guess === this.store.currentScripture().chapter) {
       this.store.successfulGuess();
