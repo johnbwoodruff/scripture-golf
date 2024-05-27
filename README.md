@@ -1,27 +1,24 @@
-# ScriptureGolf
+# Scripture Golf
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.2.
+This is LDS Scripture Golf, a classic Sunday School scripture trivia game. It is written in [Angular](https://angular.dev) with [Capacitor](https://capacitorjs.com).
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Working with Capacitor
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Once you've made changes you would like to sync to your iOS and Android projects, run `npm run sync`. This will run a production build and sync the built assets to the native projects. You can then use the following commands to work with the native projects:
 
-## Build
+```shell
+# Open the native projects in XCode or Android Studio
+$ npx cap open ios
+$ npx cap open android
+# Run the project on a device or simulator
+$ npx cap run ios
+$ npx cap run android
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## General Architecture
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+This project is built using [TailwindCSS](https://tailwindcss.com/) and [DaisyUI](https://daisyui.com/). The icons are [Lucide](https://lucide.dev/) icons. For state management the project utilizes [SignalStore](https://ngrx.io/guide/signals/signal-store) from the NgRx team.
