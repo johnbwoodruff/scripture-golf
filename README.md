@@ -1,38 +1,24 @@
 # Scripture Golf
 
-This is LDS Scripture Golf, a classic Sunday School scripture trivia game. It is written with [Ionic](https://ionic.io) and [Capacitor](https://capacitorjs.com).
+This is LDS Scripture Golf, a classic Sunday School scripture trivia game. It is written in [Angular](https://angular.dev) with [Capacitor](https://capacitorjs.com).
 
-## Developing
+## Development server
 
-You need both the Ionic CLI and Angular CLI installed.
+Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-```shell
-$ npm install -g @ionic/cli @angular/cli
-```
+## Working with Capacitor
 
-Once you've cloned the project, run `npm install` to install project dependencies. Do not use yarn as this project is built with npm in mind and may not work as expected with yarn.
-
-To serve the application locally in a browser, simply run `ionic serve` or `ionic serve --lab` to run it in the Ionic Lab.
-
-To get your changes to run in a native environment (iOS or Android device/emulator) simply run the following commands upon making your desired changes:
+Once you've made changes you would like to sync to your iOS and Android projects, run `npm run sync`. This will run a production build and sync the built assets to the native projects. You can then use the following commands to work with the native projects:
 
 ```shell
-$ ionic build
-$ npx cap sync # or `npx cap copy` if you haven't made plugin changes
-# Open the desired project
+# Open the native projects in XCode or Android Studio
 $ npx cap open ios
 $ npx cap open android
+# Run the project on a device or simulator
+$ npx cap run ios
+$ npx cap run android
 ```
 
-You can then run your app on a device or emulator using Xcode or Android Studio.
+## General Architecture
 
-## Production Build
-
-To deploy to the various app stores, run the following commands to build your app:
-
-```shell
-$ ionic build --prod
-$ npx cap sync
-```
-
-Then open your project in Xcode or Android Studio and generate your signed build from there as with a normal iOS or Android app.
+This project is built using [TailwindCSS](https://tailwindcss.com/) and [DaisyUI](https://daisyui.com/). The icons are [Lucide](https://lucide.dev/) icons. For state management the project utilizes [SignalStore](https://ngrx.io/guide/signals/signal-store) from the NgRx team.

@@ -1,27 +1,46 @@
-import { Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  inject
+} from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { Preferences } from '@capacitor/preferences';
 
-import { Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { ScriptureGolfStore } from './stores/app-store/app.store';
+import { AppTheme } from './stores/app-store/app.store.types';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss']
+  selector: 'sg-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
-  constructor(
-    private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar
-  ) {
-    this.initializeApp();
+  store = inject(ScriptureGolfStore);
+
+  constructor() {
+    effect(() => {
+      switch (this.store.theme()) {
+        case 'sglight':
+          document.documentElement.classList.remove('sgdark');
+          document.documentElement.setAttribute('data-theme', 'sglight');
+          break;
+        case 'sgdark':
+          document.documentElement.classList.add('sgdark');
+          document.documentElement.setAttribute('data-theme', 'sgdark');
+          break;
+      }
+    });
+
+    this.getPersistedTheme();
   }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
+  private async getPersistedTheme() {
+    const ret = await Preferences.get({ key: 'theme' });
+    const theme = ret?.value ?? 'sgdark';
+    this.store.updateTheme(theme as AppTheme);
   }
 }

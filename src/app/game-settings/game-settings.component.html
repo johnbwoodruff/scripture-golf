@@ -1,0 +1,135 @@
+<form
+  class="container mx-auto"
+  [formGroup]="settingsForm"
+  (ngSubmit)="startGame()"
+>
+  <!-- Nav -->
+  <div class="navbar bg-base-200 drop-shadow">
+    <div class="flex-1">
+      <a class="btn btn-ghost text-xl">Game Options</a>
+    </div>
+    <div class="flex-none">
+      <ul class="menu menu-horizontal px-1">
+        <li><a [routerLink]="'/'">Cancel</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Number of Players -->
+  @if (multiplayer) {
+    <div class="container mx-auto px-4">
+      <p class="mt-6 mb-4">Number of Players</p>
+      <div class="grid grid-cols-3 gap-2">
+        <input
+          class="btn btn-outline w-full"
+          type="radio"
+          name="numPlayers"
+          aria-label="Two"
+          formControlName="numPlayers"
+          [value]="2"
+        />
+        <input
+          class="btn btn-outline w-full"
+          type="radio"
+          name="numPlayers"
+          aria-label="Three"
+          formControlName="numPlayers"
+          [value]="3"
+        />
+        <input
+          class="btn btn-outline w-full"
+          type="radio"
+          name="numPlayers"
+          aria-label="Four"
+          formControlName="numPlayers"
+          [value]="4"
+        />
+      </div>
+    </div>
+  }
+
+  <!-- Books to Use -->
+  <div class="container mx-auto px-4">
+    <p class="mt-6 mb-4">Books of Scripture</p>
+    <div
+      class="grid grid-rows-3 grid-cols-2 gap-2"
+      formGroupName="selectedBooks"
+    >
+      <input
+        class="btn btn-outline w-full col-span-2"
+        type="checkbox"
+        name="BOM"
+        aria-label="Book of Mormon"
+        formControlName="BOM"
+      />
+      <input
+        class="btn btn-outline w-full"
+        type="checkbox"
+        name="DC"
+        aria-label="Doctrine & Covenants"
+        formControlName="DC"
+      />
+      <input
+        class="btn btn-outline w-full"
+        type="checkbox"
+        name="PGP"
+        aria-label="Pearl of Great Price"
+        formControlName="PGP"
+      />
+      <input
+        class="btn btn-outline w-full"
+        type="checkbox"
+        name="OT"
+        aria-label="Old Testament"
+        formControlName="OT"
+      />
+      <input
+        class="btn btn-outline w-full"
+        type="checkbox"
+        name="NT"
+        aria-label="New Testament"
+        formControlName="NT"
+      />
+    </div>
+  </div>
+
+  <!-- Number of Rounds -->
+  <div class="container mx-auto px-4">
+    <div class="flex flex-row justify-between items-center mt-6 mb-4">
+      <p>Number of Rounds</p>
+      <div class="badge badge-primary">
+        {{ numRoundsValue$ | async }}
+      </div>
+    </div>
+    <input
+      type="range"
+      min="1"
+      max="9"
+      value="1"
+      class="range range-primary"
+      step="1"
+      formControlName="numRounds"
+    />
+    <div class="w-full flex justify-between text-xs px-2">
+      <span>|</span>
+      <span>|</span>
+      <span>|</span>
+      <span>|</span>
+      <span>|</span>
+      <span>|</span>
+      <span>|</span>
+      <span>|</span>
+      <span>|</span>
+    </div>
+  </div>
+
+  <div class="container mx-auto mt-6 px-4">
+    <button
+      type="submit"
+      class="btn btn-primary btn-block"
+      [disabled]="settingsForm.invalid"
+    >
+      Start Game
+    </button>
+  </div>
+</form>

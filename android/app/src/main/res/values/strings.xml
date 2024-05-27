@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-  <string name="app_name">Scripture Golf</string>
-  <string name="title_activity_main">Scripture Golf</string>
-  <string name="package_name">com.ionicframework.scripturegolf455436</string>
-  <string name="custom_url_scheme">com.ionicframework.scripturegolf455436</string>
+    <string name="app_name">Scripture Golf</string>
+    <string name="title_activity_main">Scripture Golf</string>
+    <string name="package_name">com.ionicframework.scripturegolf455436</string>
+    <string name="custom_url_scheme">com.ionicframework.scripturegolf455436</string>
 </resources>

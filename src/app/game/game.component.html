@@ -1,0 +1,92 @@
+<main class="h-full overflow-hidden flex flex-col">
+  <div class="navbar bg-base-200 drop-shadow flex-none">
+    <div class="flex-1 flex-row items-center">
+      <a class="btn btn-ghost text-xl">
+        Round {{ store.currentRound() }} - Player {{ store.currentPlayerNum() }}
+      </a>
+    </div>
+    <div class="flex-none">
+      <ul class="menu menu-horizontal px-1">
+        <li><a [routerLink]="'/'">Quit</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="flex flex-col items-start p-4 flex-auto overflow-auto">
+    @if (store.roundState() === 'verse') {
+      <p class="prose overflow-auto flex-auto">
+        {{ store.currentScripture().verse }}
+      </p>
+    } @else {
+      <div
+        class="flex flex-col gap-4 items-center justify-start flex-auto w-full"
+      >
+        <h4>Guess the {{ guessLabel() }}</h4>
+        @if (store.guessState() === 'book') {
+          <select
+            class="select select-bordered w-full max-w-xs"
+            [ngModel]="bookGuess()"
+            (ngModelChange)="bookGuess.set($event)"
+          >
+            @for (group of store.booksSelectList(); track group.volume) {
+              <option disabled>{{ group.volume }}</option>
+              @for (book of group.books; track $index) {
+                <option [value]="book.title">{{ book.title }}</option>
+              }
+            }
+          </select>
+          <button class="btn btn-primary btn-wide" (click)="guessBook()">
+            Guess
+          </button>
+        } @else {
+          <input
+            type="number"
+            placeholder="Chapter Number"
+            class="input input-bordered w-full max-w-xs"
+            [ngModel]="chapterGuess()"
+            (ngModelChange)="chapterGuess.set($event)"
+          />
+          <button class="btn btn-primary btn-wide" (click)="guessChapter()">
+            Guess
+          </button>
+        }
+
+        <div
+          class="grid gap-x-6 gap-y-4 mt-6 w-full"
+          [class.grid-cols-2]="store.guessState() === 'book'"
+          [class.grid-cols-4]="store.guessState() === 'chapter'"
+        >
+          @for (guess of store.incorrectGuesses(); track $index) {
+            <div
+              class="flex flex-row align-center justify-center gap-1 text-error"
+            >
+              <lucide-icon [img]="icons.X"></lucide-icon>
+              <p>{{ guess }}</p>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="navbar bg-base-200 drop-shadow justify-end flex-none">
+    <div class="flex-1 flex-row items-center">
+      <a class="btn btn-ghost text-xl">
+        Points: {{ store.currentPlayerScore() }}
+      </a>
+    </div>
+    <div class="flex-none">
+      <ul class="menu menu-horizontal px-1">
+        <li>
+          <a (click)="toggleRoundState()">
+            @if (store.roundState() === 'verse') {
+              Guess
+            } @else {
+              Verse
+            }
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</main>

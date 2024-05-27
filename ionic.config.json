@@ -1,7 +1,0 @@
-{
-  "name": "Scripture Golf",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}
