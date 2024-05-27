@@ -153,13 +153,15 @@ export const GameStore = signalStore(
       if (!store.incorrectGuesses().includes(guess)) {
         const currentRound = store.currentRound();
         const player = store.currentPlayer();
+        const playerIndex = store.currentPlayerNum() - 1;
         player.addPoint(currentRound);
+        const players = store.players();
         patchState(store, (state) => ({
-          players: state.players.splice(
-            store.currentPlayerNum() - 1,
-            1,
-            player
-          ),
+          players: [
+            ...players.slice(0, playerIndex),
+            player,
+            ...players.slice(playerIndex + 1)
+          ],
           incorrectGuesses: Array.from(
             new Set([...state.incorrectGuesses, guess])
           )
