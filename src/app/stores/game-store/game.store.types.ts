@@ -18,6 +18,8 @@ export interface GameSettings {
   numPlayers: number;
   numRounds: number;
   selectedBooks: SelectedBooks;
+  hints: boolean;
+  limitGuesses: boolean;
 }
 
 export type RoundState = 'verse' | 'guess';

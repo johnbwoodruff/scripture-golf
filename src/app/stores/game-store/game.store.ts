@@ -25,7 +25,9 @@ const initialState: GameState = {
       PGP: false,
       OT: false,
       NT: false
-    }
+    },
+    hints: true,
+    limitGuesses: false
   },
   players: [],
   currentPlayerNum: 1,

@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  effect,
   inject,
   signal
 } from '@angular/core';
@@ -13,6 +12,7 @@ import { GameSettings } from '../stores/game-store/game.store.types';
 import { LucideAngularModule } from 'lucide-angular';
 import { ICONS } from '../utils/icons';
 import { FormsModule } from '@angular/forms';
+import { ToastService } from '../services/toast/toast.service';
 
 @Component({
   selector: 'sg-game',
@@ -25,6 +25,7 @@ import { FormsModule } from '@angular/forms';
 export class GameComponent {
   store = inject(GameStore);
   router = inject(Router);
+  toast = inject(ToastService);
   icons = ICONS;
   guessLabel = computed(() =>
     this.store.guessState() === 'book' ? 'Book' : 'Chapter'
@@ -60,9 +61,11 @@ export class GameComponent {
       return;
     }
 
+    const answer = this.store.currentScripture().book;
     const guess = this.bookGuess()!;
 
-    if (guess === this.store.currentScripture().book) {
+    if (guess === answer) {
+      this.toast.show('Correct!');
       this.store.successfulGuess();
     } else {
       this.store.addIncorrectGuess(guess);
@@ -76,11 +79,19 @@ export class GameComponent {
       return;
     }
 
+    const answer = this.store.currentScripture().chapter;
     const guess = this.chapterGuess()!;
 
-    if (guess === this.store.currentScripture().chapter) {
+    if (guess === answer) {
+      this.toast.show('Correct!');
       this.store.successfulGuess();
     } else {
+      const showHint = this.store.settings().hints;
+      if (showHint && guess > answer) {
+        this.toast.show('Incorrect. Guess lower.');
+      } else if (showHint && guess < answer) {
+        this.toast.show('Incorrect. Guess higher.');
+      }
       this.store.addIncorrectGuess(guess);
     }
 
