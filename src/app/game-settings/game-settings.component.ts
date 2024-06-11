@@ -36,7 +36,8 @@ export class GameSettingsComponent {
       },
       { validators: [booksValidator] }
     ),
-    numRounds: new FormControl(1, Validators.required)
+    numRounds: new FormControl(1, Validators.required),
+    hints: new FormControl(true)
   });
 
   numRoundsValue$ = this.settingsForm

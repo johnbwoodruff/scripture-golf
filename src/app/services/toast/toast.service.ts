@@ -22,7 +22,7 @@ export class ToastService {
         .position()
         .global()
         .centerHorizontally()
-        .top('10px'),
+        .bottom('50px'),
       scrollStrategy: this.overlay.scrollStrategies.noop(),
       data: {
         message
