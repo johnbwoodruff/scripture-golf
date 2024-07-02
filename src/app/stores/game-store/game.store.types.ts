@@ -19,6 +19,7 @@ export interface GameSettings {
   numRounds: number;
   selectedBooks: SelectedBooks;
   hints: boolean;
+  expertMode: boolean;
   limitGuesses: boolean;
 }
 

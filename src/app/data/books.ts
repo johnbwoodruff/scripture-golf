@@ -6,11 +6,21 @@ type VolumeNames = {
 
 export const VOLUME_NAMES: VolumeNames = {
   BOM: 'Book of Mormon',
-  DC: 'Doctrine & Covenants',
+  DC: 'Doctrine and Covenants',
   PGP: 'Pearl of Great Price',
   OT: 'Old Testament',
   NT: 'New Testament'
-};
+} as const;
+
+export const DC_SECTION_RANGES = {
+  19: 'Sections 1-19',
+  39: 'Sections 20-39',
+  59: 'Sections 40-59',
+  79: 'Sections 60-79',
+  99: 'Sections 80-99',
+  119: 'Sections 100-119',
+  138: 'Sections 120-138'
+} as const;
 
 export const BOOKS: ScriptureBook[] = [
   {
@@ -75,31 +85,31 @@ export const BOOKS: ScriptureBook[] = [
   },
   {
     key: 'DC',
-    title: 'Sections 1-19'
+    title: DC_SECTION_RANGES[19]
   },
   {
     key: 'DC',
-    title: 'Sections 20-39'
+    title: DC_SECTION_RANGES[39]
   },
   {
     key: 'DC',
-    title: 'Sections 40-59'
+    title: DC_SECTION_RANGES[59]
   },
   {
     key: 'DC',
-    title: 'Sections 60-79'
+    title: DC_SECTION_RANGES[79]
   },
   {
     key: 'DC',
-    title: 'Sections 80-99'
+    title: DC_SECTION_RANGES[99]
   },
   {
     key: 'DC',
-    title: 'Sections 100-119'
+    title: DC_SECTION_RANGES[119]
   },
   {
     key: 'DC',
-    title: 'Sections 120-138'
+    title: DC_SECTION_RANGES[138]
   },
   {
     key: 'NT',
@@ -372,6 +382,14 @@ export const BOOKS: ScriptureBook[] = [
   {
     key: 'PGP',
     title: 'Abraham'
+  },
+  {
+    key: 'PGP',
+    title: 'Joseph Smith--Matthew'
+  },
+  {
+    key: 'PGP',
+    title: 'Joseph Smith--History'
   },
   {
     key: 'PGP',
