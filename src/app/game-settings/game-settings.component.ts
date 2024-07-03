@@ -9,6 +9,7 @@ import {
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { startWith } from 'rxjs';
 import { booksValidator } from './books.validator';
+import { GameSettings } from '../stores/game-store/game.store.types';
 
 @Component({
   selector: 'sg-game-settings',
@@ -37,7 +38,8 @@ export class GameSettingsComponent {
       { validators: [booksValidator] }
     ),
     numRounds: new FormControl(1, Validators.required),
-    hints: new FormControl(true)
+    hints: new FormControl(true),
+    expertMode: new FormControl(false)
   });
 
   numRoundsValue$ = this.settingsForm

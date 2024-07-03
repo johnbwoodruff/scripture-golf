@@ -27,6 +27,7 @@ const initialState: GameState = {
       NT: false
     },
     hints: true,
+    expertMode: false,
     limitGuesses: false
   },
   players: [],
@@ -75,7 +76,8 @@ export const GameStore = signalStore(
       const books = generateBooks(settings.selectedBooks);
       const scriptures = generateScriptures(
         settings.selectedBooks,
-        settings.numRounds
+        settings.numRounds,
+        settings.expertMode
       );
 
       const newState: Partial<GameState> = {
