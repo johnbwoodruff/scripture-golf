@@ -305,7 +305,7 @@ export const BOOKS: ScriptureBook[] = [
   },
   {
     key: 'OT',
-    title: `Solomon's Song`
+    title: 'Song of Solomon'
   },
   {
     key: 'OT',
